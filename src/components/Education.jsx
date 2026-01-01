@@ -1,0 +1,166 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
+
+const Education = () => {
+    const educationData = [
+        {
+            degree: "B.E. in Computer Science & Engineering",
+            institution: "Basaveshwar Engineering College, Bagalkot",
+            duration: "2022 - 2026",
+            grade: "7.93 CGPA",
+            description: "Focused on core Computer Science principles including Data Structures, Algorithms, Computer Networks, and Operating Systems. Maintaining a strong academic record with special interest in System-level programming.",
+            location: "Bagalkot, Karnataka",
+            color: "#3b82f6"
+        },
+        {
+            degree: "Pre-University Education (PCME)",
+            institution: "Tejas International PU College",
+            duration: "2020 - 2022",
+            grade: "First Class",
+            description: "Completed higher secondary education with a focus on Physics, Chemistry, Mathematics, and Computer Science.",
+            location: "Bagalkot, Karnataka",
+            color: "#8b5cf6"
+        },
+        {
+            degree: "Secondary School Leaving Certificate (SSLC)",
+            institution: "M.R.G Internation Public School",
+            duration: "2020",
+            grade: "First Class",
+            description: "Foundational education with a focus on science and mathematics.",
+            location: "Bagalkot, Karnataka",
+            color: "#06b6d4"
+        }
+    ];
+
+    return (
+        <section id="education" style={{ padding: '8rem 0', position: 'relative', overflow: 'hidden' }}>
+            <div className="container">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    style={{ textAlign: 'center', marginBottom: '6rem' }}
+                >
+                    <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '1rem' }}>
+                        Academic <span className="gradient-text">Journey</span>
+                    </h2>
+                    <p style={{ color: '#a3a3a3', fontSize: '1.2rem' }}>
+                        Foundation of my technical expertise and engineering mindset
+                    </p>
+                </motion.div>
+
+                <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }}>
+                    {/* Vertical Line */}
+                    <div style={{
+                        position: 'absolute',
+                        left: '0px',
+                        top: '0',
+                        bottom: '0',
+                        width: '2px',
+                        background: 'linear-gradient(180deg, var(--primary-color), var(--secondary-color), transparent)',
+                        opacity: 0.3
+                    }} />
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+                        {educationData.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.2 }}
+                                style={{ position: 'relative', paddingLeft: '3.5rem' }}
+                            >
+                                {/* Glowing Dot */}
+                                <motion.div
+                                    whileHover={{ scale: 1.5 }}
+                                    style={{
+                                        position: 'absolute',
+                                        left: '-6px',
+                                        top: '0',
+                                        width: '14px',
+                                        height: '14px',
+                                        borderRadius: '50%',
+                                        background: item.color,
+                                        boxShadow: `0 0 20px ${item.color}`,
+                                        zIndex: 2
+                                    }}
+                                />
+
+                                <div style={{
+                                    background: 'rgba(23, 23, 23, 0.4)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                                    borderRadius: '2rem',
+                                    padding: '2.5rem',
+                                    transition: 'transform 0.3s ease',
+                                    position: 'relative',
+                                    overflow: 'hidden'
+                                }}>
+                                    {/* Sidebar Accent */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        left: 0,
+                                        top: 0,
+                                        bottom: 0,
+                                        width: '4px',
+                                        background: item.color,
+                                        opacity: 0.6
+                                    }} />
+
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+                                        <div>
+                                            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '0.5rem', color: '#fff' }}>
+                                                {item.degree}
+                                            </h3>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: item.color, fontWeight: '600' }}>
+                                                <GraduationCap size={18} />
+                                                <span>{item.institution}</span>
+                                            </div>
+                                        </div>
+                                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.5rem 1rem', borderRadius: '100px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#888', fontSize: '0.9rem' }}>
+                                            <Calendar size={14} />
+                                            <span>{item.duration}</span>
+                                        </div>
+                                    </div>
+
+                                    <p style={{ color: '#a3a3a3', lineHeight: '1.7', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
+                                        {item.description}
+                                    </p>
+
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', color: '#666', fontSize: '0.9rem', flexWrap: 'wrap' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                            <MapPin size={14} />
+                                            <span>{item.location}</span>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: item.color, fontWeight: '700' }}>
+                                            <Award size={14} />
+                                            <span>Grade: {item.grade}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Ambient background decoration */}
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                right: '-10%',
+                width: '400px',
+                height: '400px',
+                background: 'radial-gradient(circle, var(--secondary-color) 0%, transparent 70%)',
+                opacity: 0.05,
+                filter: 'blur(80px)',
+                zIndex: -1,
+                pointerEvents: 'none'
+            }} />
+        </section>
+    );
+};
+
+export default Education;
