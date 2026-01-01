@@ -157,7 +157,7 @@ const Hero = () => {
                         style={{ marginTop: '3rem' }}
                     >
                         <motion.a
-                            href="/Rohit Mantur.pdf"
+                            href="Rohit Mantur.pdf"
                             download="Rohit_Mantur_Resume.pdf"
                             className="resume-btn"
                             whileHover={{

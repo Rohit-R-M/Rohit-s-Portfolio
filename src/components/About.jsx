@@ -120,7 +120,7 @@ const About = () => {
                                 border: '2px solid rgba(132, 204, 22, 0.2)'
                             }}>
                                 <img
-                                    src="/my.jpg"
+                                    src="my.jpg"
                                     alt="Rohit Mantur"
                                     style={{
                                         width: '100%',
