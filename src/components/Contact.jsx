@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Linkedin, Instagram, Download } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin, Instagram } from 'lucide-react';
 
 const Contact = () => {
     return (
@@ -10,7 +10,7 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    style={{ fontSize: '2.5rem', marginBottom: '4rem', textAlign: 'center' }}
+                    style={{ fontSize: 'clamp(2.2rem, 8vw, 3rem)', marginBottom: '3rem', textAlign: 'center' }}
                 >
                     Get In <span className="gradient-text">Touch</span>
                 </motion.h2>
@@ -227,59 +227,7 @@ const Contact = () => {
                             <span style={{ fontSize: '1rem', fontWeight: '700', wordBreak: 'break-all' }}>rohitmantur21@gmail.com</span>
                         </motion.a>
 
-                        {/* RESUME CARD */}
-                        <motion.a
-                            href="/Rohit Mantur.pdf"
-                            download="Rohit_Mantur_Resume.pdf"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -10, borderColor: 'var(--primary-color)', background: 'rgba(59, 130, 246, 0.05)' }}
-                            style={{
-                                gridColumn: 'span 12',
-                                background: 'var(--surface-color)',
-                                backdropFilter: 'blur(20px)',
-                                border: '1px solid var(--border-color)',
-                                borderRadius: '2.5rem',
-                                padding: '2.5rem',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '2rem',
-                                textDecoration: 'none',
-                                color: 'inherit',
-                                transition: 'all 0.4s ease',
-                                marginTop: '1rem'
-                            }}
-                        >
-                            <div style={{
-                                color: 'var(--primary-color)',
-                                background: 'var(--primary-color)22',
-                                padding: '1.2rem',
-                                borderRadius: '1.5rem',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                boxShadow: '0 0 20px rgba(59, 130, 246, 0.2)'
-                            }}>
-                                <Download size={32} />
-                            </div>
-                            <div style={{ textAlign: 'left' }}>
-                                <p style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.2rem' }}>Download My Resume</p>
-                                <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1rem', opacity: 0.6 }}>Get a detailed look at my experience</p>
-                            </div>
-                            <div style={{
-                                marginLeft: 'auto',
-                                padding: '0.8rem 1.5rem',
-                                border: '1px solid var(--primary-color)',
-                                borderRadius: '100px',
-                                color: 'var(--primary-color)',
-                                fontWeight: '700',
-                                fontSize: '0.9rem'
-                            }}>
-                                PDF • 293 KB
-                            </div>
-                        </motion.a>
+
                     </div>
                 </div>
 

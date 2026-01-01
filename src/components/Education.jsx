@@ -26,7 +26,7 @@ const Education = () => {
             degree: "Secondary School Leaving Certificate (SSLC)",
             institution: "M.R.G Internation Public School",
             duration: "2020",
-            grade: "First Class",
+            grade: "Pass",
             description: "Foundational education with a focus on science and mathematics.",
             location: "Bagalkot, Karnataka",
             color: "#06b6d4"

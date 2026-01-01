@@ -68,10 +68,10 @@ const Skills = () => {
                     viewport={{ once: true }}
                     style={{ textAlign: 'center', marginBottom: '5rem' }}
                 >
-                    <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '1rem' }}>
+                    <h2 style={{ fontSize: 'clamp(2.2rem, 8vw, 3.5rem)', fontWeight: '900', marginBottom: '1rem' }}>
                         Technical <span className="gradient-text">Arsenal</span>
                     </h2>
-                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem' }}>
+                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem', padding: '0 1.5rem' }}>
                         Individual building blocks of my engineering journey
                     </p>
                 </motion.div>

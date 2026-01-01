@@ -4,14 +4,24 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const About = () => {
     return (
-        <section id="about" style={{ padding: '8rem 0', minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
+        <section id="about" style={{ padding: '4rem 0 8rem 0', minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'minmax(350px, 1fr) minmax(500px, 1.8fr)',
-                    gap: '8rem',
-                    alignItems: 'center'
-                }}>
+                <div className="about-grid">
+                    <style>{`
+                        .about-grid {
+                            display: grid;
+                            grid-template-columns: minmax(300px, 1fr) 1.8fr;
+                            gap: 8rem;
+                            alignItems: center;
+                        }
+                        @media (max-width: 1024px) {
+                            .about-grid {
+                                grid-template-columns: 1fr;
+                                gap: 4rem;
+                                text-align: center;
+                            }
+                        }
+                    `}</style>
 
                     {/* Image Column - Nature-Inspired Design */}
                     <motion.div

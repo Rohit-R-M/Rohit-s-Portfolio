@@ -27,8 +27,11 @@ function App() {
       <GalaxyBackground theme={theme} />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
-        <Hero />
-        <About />
+        {/* Unified Hero & About flow */}
+        <div style={{ position: 'relative' }}>
+          <Hero />
+          <About />
+        </div>
 
         {/* Unified Background Section for Core Content */}
         <div style={{ position: 'relative' }}>

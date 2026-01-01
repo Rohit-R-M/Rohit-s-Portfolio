@@ -39,18 +39,18 @@ const Achievements = () => {
                     viewport={{ once: true }}
                     style={{ textAlign: 'center', marginBottom: '6rem' }}
                 >
-                    <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '1rem' }}>
+                    <h2 style={{ fontSize: 'clamp(2.2rem, 8vw, 3.5rem)', fontWeight: '900', marginBottom: '1rem' }}>
                         Major <span className="gradient-text">Milestones</span>
                     </h2>
-                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem' }}>
+                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem', padding: '0 1rem' }}>
                         Recognition of my passion for building and solving
                     </p>
                 </motion.div>
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))',
-                    gap: '2.5rem'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+                    gap: '2rem'
                 }}>
                     {achievements.map((item, index) => (
                         <motion.div

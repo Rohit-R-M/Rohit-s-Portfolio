@@ -33,7 +33,15 @@ const Navbar = ({ theme, toggleTheme }) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
             }}
+            className="navbar"
         >
+            <style>{`
+                @media (max-width: 768px) {
+                    .navbar {
+                        padding: 1rem 1.5rem !important;
+                    }
+                }
+            `}</style>
             <div style={{ fontSize: '1.5rem', fontWeight: 'bold', zIndex: 60 }}>
                 <a href="#">Rohit<span style={{ color: 'var(--primary-color)' }}>.</span></a>
             </div>

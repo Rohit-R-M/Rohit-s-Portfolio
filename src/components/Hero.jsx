@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Download } from 'lucide-react';
 
 const Typewriter = ({ texts, delay = 100, waitTime = 2000 }) => {
     const [currentText, setCurrentText] = useState('');
@@ -58,7 +59,8 @@ const Hero = () => {
     return (
         <section
             style={{
-                minHeight: '100vh',
+                minHeight: '90vh',
+                padding: '12rem 0 4rem 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -74,7 +76,6 @@ const Hero = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                     style={{
-                        height: '100vh',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
@@ -149,32 +150,126 @@ const Hero = () => {
                             with strong fundamentals in Computer Networks, DSA, and system-level concepts.
                         </span>
                     </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.4, duration: 1 }}
+                        style={{ marginTop: '3rem' }}
+                    >
+                        <motion.a
+                            href="/Rohit Mantur.pdf"
+                            download="Rohit_Mantur_Resume.pdf"
+                            className="resume-btn"
+                            whileHover={{
+                                scale: 1.05,
+                                backgroundColor: 'var(--primary-color)',
+                                color: '#fff',
+                                boxShadow: '0 0 30px var(--primary-color)44'
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                                padding: '1.2rem 2.8rem',
+                                background: 'transparent',
+                                border: '1px solid var(--primary-color)',
+                                borderRadius: '100px',
+                                color: 'var(--primary-color)',
+                                fontWeight: '700',
+                                fontSize: '1.1rem',
+                                textDecoration: 'none',
+                                transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                                zIndex: 20,
+                                position: 'relative'
+                            }}
+                        >
+                            <Download size={22} />
+                            Download Resume
+                        </motion.a>
+                    </motion.div>
                 </motion.div>
             </div>
 
             <style>{`
                 @media (max-width: 768px) {
-                    .hero-greeting { fontSize: 1.1rem !important; letterSpacing: 2px !important; }
-                    h1 { fontSize: 3.5rem !important; line-height: 1 !important; }
-                    .hero-description { fontSize: 1.2rem !important; padding: 0 1rem; }
-                    .hero-description span { fontSize: 0.9rem !important; }
+                    .hero-greeting { 
+                        font-size: 1rem !important; 
+                        letter-spacing: 2px !important; 
+                        margin-bottom: 0.5rem !important;
+                    }
+                    h1 { 
+                        font-size: 4rem !important; 
+                        line-height: 0.9 !important; 
+                        margin-bottom: 1.5rem !important;
+                    }
+                    .hero-description { 
+                        font-size: 1.1rem !important; 
+                        padding: 0 1rem; 
+                        line-height: 1.5 !important;
+                    }
+                    .hero-description span { 
+                        font-size: 0.9rem !important; 
+                    }
+                    .resume-btn {
+                        padding: 1rem 2rem !important;
+                        font-size: 1rem !important;
+                        margin-top: 2rem !important;
+                    }
                 }
             `}</style>
 
-            {/* Background Glows (Static but persistent) */}
+            {/* Background Glows (Animated) */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.15 }}
-                transition={{ duration: 2 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{
+                    opacity: [0.1, 0.2, 0.1],
+                    scale: [0.8, 1.1, 0.8],
+                    x: [0, 50, 0],
+                    y: [0, -30, 0]
+                }}
+                transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
                 style={{
                     position: 'absolute',
                     top: '20%',
                     left: '10%',
-                    width: '300px',
-                    height: '300px',
+                    width: '400px',
+                    height: '400px',
                     background: 'var(--primary-color)',
                     filter: 'blur(150px)',
-                    borderRadius: '50%'
+                    borderRadius: '50%',
+                    zIndex: 0
+                }}
+            />
+            {/* Secondary Animated Glow */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{
+                    opacity: [0.05, 0.15, 0.05],
+                    scale: [1, 1.3, 1],
+                    x: [0, -60, 0],
+                    y: [0, 40, 0]
+                }}
+                transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2
+                }}
+                style={{
+                    position: 'absolute',
+                    bottom: '10%',
+                    right: '5%',
+                    width: '500px',
+                    height: '500px',
+                    background: 'var(--secondary-color)',
+                    filter: 'blur(180px)',
+                    borderRadius: '50%',
+                    zIndex: 0
                 }}
             />
         </section>

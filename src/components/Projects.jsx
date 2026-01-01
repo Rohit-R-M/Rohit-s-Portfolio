@@ -206,7 +206,7 @@ const Projects = () => {
                         whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1 }}
-                        style={{ fontSize: '3.5rem', fontWeight: '900', letterSpacing: '-2px' }}
+                        style={{ fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', fontWeight: '900', letterSpacing: '-2px' }}
                     >
                         SELECTED <span className="gradient-text">PROJECTS</span>
                     </motion.h2>
@@ -221,7 +221,7 @@ const Projects = () => {
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
                     gap: '2.5rem'
                 }}>
                     {projects.map((project, index) => (
@@ -231,8 +231,8 @@ const Projects = () => {
             </div>
             <style>{`
                 @media (max-width: 768px) {
-                    #projects { padding: 5rem 0 !important; }
-                    #projects h2 { fontSize: 2.5rem !important; }
+                    #projects { padding: 4rem 0 !important; }
+                    .project-card-padding { padding: 2rem !important; }
                 }
             `}</style>
         </section>

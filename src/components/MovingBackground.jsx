@@ -144,6 +144,39 @@ const GalaxyBackground = ({ theme }) => {
                 />
             </motion.div>
 
+            {/* Light Mode Sparkles */}
+            {!isDark && (
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+                    {[...Array(20)].map((_, i) => (
+                        <motion.div
+                            key={`sparkle-${i}`}
+                            animate={{
+                                opacity: [0, 0.8, 0],
+                                scale: [0, 1.2, 0],
+                                y: ['0vh', '-20vh']
+                            }}
+                            transition={{
+                                duration: 2 + Math.random() * 3,
+                                repeat: Infinity,
+                                delay: Math.random() * 5,
+                                ease: "easeOut"
+                            }}
+                            style={{
+                                position: 'absolute',
+                                top: (Math.random() * 100) + '%',
+                                left: (Math.random() * 100) + '%',
+                                width: '2px',
+                                height: '2px',
+                                background: 'var(--primary-color)',
+                                borderRadius: '50%',
+                                boxShadow: '0 0 10px var(--primary-color)',
+                                zIndex: 1
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
+
             {/* 2. Star Layers */}
             <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '200%', y: starLayer1Y, scaleY: warpScale, willChange: 'transform', opacity: isDark ? 1 : 0.4 }}>
                 {stars.small.map(star => (
@@ -160,12 +193,19 @@ const GalaxyBackground = ({ theme }) => {
                 ))}
             </motion.div>
 
-            <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '200%', y: starLayer2Y, scaleY: warpScale, willChange: 'transform', opacity: isDark ? 1 : 0.3 }}>
+            <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '200%', y: starLayer2Y, scaleY: warpScale, willChange: 'transform', opacity: isDark ? 1 : 0.6 }}>
                 {stars.medium.map(star => (
                     <motion.div
                         key={star.id}
-                        animate={{ opacity: [star.opacity, star.opacity * 0.3, star.opacity] }}
-                        transition={{ duration: star.duration, repeat: Infinity, ease: "easeInOut" }}
+                        animate={{
+                            opacity: [star.opacity, star.opacity * 0.3, star.opacity],
+                            scale: !isDark ? [1, 1.5, 1] : [1, 1.2, 1]
+                        }}
+                        transition={{
+                            duration: !isDark ? star.duration * 0.7 : star.duration,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
                         style={{
                             position: 'absolute',
                             top: star.top,
@@ -175,13 +215,53 @@ const GalaxyBackground = ({ theme }) => {
                             background: starColor,
                             borderRadius: '50%',
                             opacity: star.opacity,
-                            boxShadow: isDark ? '0 0 4px rgba(255, 255, 255, 0.4)' : 'none'
+                            boxShadow: isDark ? '0 0 4px rgba(255, 255, 255, 0.4)' : `0 0 6px ${starColor}44`
                         }}
                     />
                 ))}
             </motion.div>
 
-            {/* 3. Subtle Grain / Noise Overlay */}
+            {/* 3. Light Mode Atmospheric Orbs (Only visible in light mode) */}
+            {!isDark && (
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
+                    {[...Array(6)].map((_, i) => (
+                        <motion.div
+                            key={`orb-${i}`}
+                            animate={{
+                                x: [
+                                    Math.random() * 100 + '%',
+                                    (Math.random() * 100) + '%',
+                                    (Math.random() * 100) + '%'
+                                ],
+                                y: [
+                                    Math.random() * 100 + '%',
+                                    (Math.random() * 100) + '%',
+                                    (Math.random() * 100) + '%'
+                                ],
+                                scale: [1, 1.2, 0.9, 1],
+                                opacity: [0.3, 0.5, 0.3]
+                            }}
+                            transition={{
+                                duration: 20 + Math.random() * 20,
+                                repeat: Infinity,
+                                ease: "linear"
+                            }}
+                            style={{
+                                position: 'absolute',
+                                width: '30vw',
+                                height: '30vw',
+                                background: i % 2 === 0 ? 'radial-gradient(circle, #dcfce7 0%, transparent 70%)' : 'radial-gradient(circle, #e0f2fe 0%, transparent 70%)',
+                                filter: 'blur(100px)',
+                                borderRadius: '50%',
+                                pointerEvents: 'none',
+                                zIndex: 0
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* 4. Subtle Grain / Noise Overlay */}
             <div style={{
                 position: 'absolute',
                 top: 0,
@@ -193,7 +273,7 @@ const GalaxyBackground = ({ theme }) => {
                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
             }} />
 
-            {/* 4. Layer Overlay for Contrast (Vignette) */}
+            {/* 5. Layer Overlay for Contrast (Vignette) */}
             <div style={{
                 position: 'absolute',
                 top: 0,
@@ -202,7 +282,7 @@ const GalaxyBackground = ({ theme }) => {
                 height: '100%',
                 background: isDark
                     ? 'radial-gradient(circle, transparent 40%, rgba(3, 3, 3, 0.7) 100%)'
-                    : 'radial-gradient(circle, transparent 70%, rgba(255, 255, 255, 0.4) 100%)',
+                    : 'radial-gradient(circle, transparent 70%, rgba(248, 250, 252, 0.4) 100%)',
                 pointerEvents: 'none'
             }} />
         </div>
