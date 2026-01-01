@@ -1,6 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const Typewriter = ({ texts, delay = 100, waitTime = 2000 }) => {
+    const [currentText, setCurrentText] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [charIndex, setCharIndex] = useState(0);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            const fullText = texts[currentIndex];
+
+            if (!isDeleting) {
+                if (charIndex < fullText.length) {
+                    setCurrentText(fullText.substring(0, charIndex + 1));
+                    setCharIndex(prev => prev + 1);
+                } else {
+                    setTimeout(() => setIsDeleting(true), waitTime);
+                }
+            } else {
+                if (charIndex > 0) {
+                    setCurrentText(fullText.substring(0, charIndex - 1));
+                    setCharIndex(prev => prev - 1);
+                } else {
+                    setIsDeleting(false);
+                    setCurrentIndex(prev => (prev + 1) % texts.length);
+                }
+            }
+        }, isDeleting ? delay / 2 : delay);
+
+        return () => clearTimeout(timeout);
+    }, [charIndex, isDeleting, currentIndex, texts, delay, waitTime]);
+
+    return (
+        <span style={{
+            color: 'var(--primary-color)',
+            fontWeight: '600',
+            borderRight: '2px solid var(--primary-color)',
+            paddingRight: '4px',
+            display: 'inline-block',
+            minHeight: '1.2em',
+            verticalAlign: 'bottom',
+            animation: 'cursor-blink 0.8s infinite'
+        }}>
+            {currentText}
+            <style>{`
+                @keyframes cursor-blink {
+                    0%, 100% { border-color: transparent }
+                    50% { border-color: var(--primary-color) }
+                }
+            `}</style>
+        </span>
+    );
+};
+
 const Hero = () => {
     const [phase, setPhase] = useState('entering'); // entering, collision, reveal
 
@@ -178,14 +231,23 @@ const Hero = () => {
                             transition={{ delay: 0.8, duration: 1 }}
                             className="hero-description"
                             style={{
-                                fontSize: '1.2rem',
-                                color: '#a3a3a3',
+                                fontSize: '1.5rem',
+                                color: '#e5e5e5',
                                 maxWidth: '800px',
                                 lineHeight: '1.6',
-                                fontWeight: '400'
+                                fontWeight: '500'
                             }}
                         >
-                            Flutter Developer and Computer Science Engineering student with strong fundamentals in Computer Networks, DSA, and system-level concepts.
+                            A passionate <Typewriter texts={[
+                                'Computer Science Student',
+                                'Flutter Developer',
+                                'Problem Solver',
+                                'Tech Enthusiast'
+                            ]} />
+                            <br />
+                            <span style={{ fontSize: '1.1rem', color: '#a3a3a3', fontWeight: '400' }}>
+                                with strong fundamentals in Computer Networks, DSA, and system-level concepts.
+                            </span>
                         </motion.p>
                     </motion.div>
                 )}
@@ -195,7 +257,8 @@ const Hero = () => {
                 @media (max-width: 768px) {
                     .hero-greeting { fontSize: 1.1rem !important; letterSpacing: 2px !important; }
                     h1 { fontSize: 3.5rem !important; line-height: 1 !important; }
-                    .hero-description { fontSize: 1rem !important; padding: 0 1rem; }
+                    .hero-description { fontSize: 1.2rem !important; padding: 0 1rem; }
+                    .hero-description span { fontSize: 0.9rem !important; }
                 }
             `}</style>
 
