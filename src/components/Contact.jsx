@@ -17,20 +17,23 @@ const Contact = () => {
 
                 <div style={{ position: 'relative' }}>
                     {/* Background cosmic glow */}
-                    <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '500px',
-                        height: '500px',
-                        background: 'radial-gradient(circle, var(--primary-color) 0%, transparent 70%)',
-                        opacity: 0.05,
-                        filter: 'blur(100px)',
-                        zIndex: -1
-                    }} />
+                    <div
+                        className="cosmic-glow"
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '500px',
+                            height: '500px',
+                            background: 'radial-gradient(circle, var(--primary-color) 0%, transparent 70%)',
+                            opacity: 0.05,
+                            filter: 'blur(100px)',
+                            zIndex: -1
+                        }}
+                    />
 
-                    <div style={{
+                    <div className="contact-grid" style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(12, 1fr)',
                         gap: '1.5rem',
@@ -42,6 +45,7 @@ const Contact = () => {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
+                            className="contact-card hero-cta"
                             style={{
                                 gridColumn: 'span 8',
                                 gridRow: 'span 2',
@@ -67,11 +71,11 @@ const Contact = () => {
                                 opacity: 0.3
                             }} />
 
-                            <h3 style={{ fontSize: '3.5rem', fontWeight: '900', lineHeight: '1.1', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                            <h3 className="cta-title" style={{ fontSize: '3.5rem', fontWeight: '900', lineHeight: '1.1', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
                                 Let's build <br />
                                 <span className="gradient-text" style={{ fontSize: '1.1em' }}>something iconic.</span>
                             </h3>
-                            <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem', maxWidth: '450px', marginBottom: '3rem' }}>
+                            <p className="cta-description" style={{ color: 'var(--text-dim)', fontSize: '1.2rem', maxWidth: '450px', marginBottom: '3rem' }}>
                                 I'm always looking for ambitious projects and clever people to collaborate with. Let's make it happen.
                             </p>
 
@@ -79,6 +83,7 @@ const Contact = () => {
                                 href="mailto:rohitmantur21@gmail.com"
                                 whileHover={{ scale: 1.05, backgroundColor: 'var(--text-color)', color: 'var(--bg-color)' }}
                                 whileTap={{ scale: 0.95 }}
+                                className="cta-button"
                                 style={{
                                     display: 'inline-flex',
                                     alignItems: 'center',
@@ -106,6 +111,7 @@ const Contact = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             whileHover={{ y: -10, borderColor: '#0077b5' }}
+                            className="contact-card linkedin-card"
                             style={{
                                 gridColumn: 'span 4',
                                 background: 'var(--surface-color)',
@@ -138,6 +144,7 @@ const Contact = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             whileHover={{ y: -10, borderColor: '#e4405f' }}
+                            className="contact-card instagram-card"
                             style={{
                                 gridColumn: 'span 4',
                                 background: 'var(--surface-color)',
@@ -159,16 +166,19 @@ const Contact = () => {
                         </motion.a>
 
                         {/* LOCATION CARD */}
-                        <div style={{
-                            gridColumn: 'span 5',
-                            background: 'var(--surface-color)',
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '2.5rem',
-                            padding: '2.5rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '2rem'
-                        }}>
+                        <div
+                            className="contact-card location-card"
+                            style={{
+                                gridColumn: 'span 5',
+                                background: 'var(--surface-color)',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '2.5rem',
+                                padding: '2.5rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '2rem'
+                            }}
+                        >
                             <div style={{ color: 'var(--accent-color)', background: 'var(--accent-color)11', padding: '1.2rem', borderRadius: '1.5rem' }}>
                                 <MapPin size={32} />
                             </div>
@@ -182,6 +192,7 @@ const Contact = () => {
                         <motion.a
                             href="tel:+917019576870"
                             whileHover={{ scale: 1.02 }}
+                            className="contact-card phone-card"
                             style={{
                                 gridColumn: 'span 3',
                                 background: 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)',
@@ -207,6 +218,7 @@ const Contact = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             whileHover={{ y: -10, borderColor: 'var(--primary-color)' }}
+                            className="contact-card email-card"
                             style={{
                                 gridColumn: 'span 4',
                                 background: 'var(--surface-color)',
@@ -233,14 +245,62 @@ const Contact = () => {
 
                 <style dangerouslySetInnerHTML={{
                     __html: `
-                    @media (max-width: 1100px) {
-                        #contact .container > div {
+                    @media (max-width: 1024px) {
+                        .contact-grid {
                             grid-template-columns: repeat(2, 1fr) !important;
-                            display: flex !important;
-                            flex-direction: column !important;
+                            gap: 1.2rem !important;
                         }
-                        #contact .container > div > * {
+                        .contact-card {
                             grid-column: span 1 !important;
+                            grid-row: span 1 !important;
+                        }
+                        .hero-cta {
+                            grid-column: span 2 !important;
+                            padding: 3rem !important;
+                        }
+                        .location-card {
+                            grid-column: span 2 !important;
+                        }
+                    }
+
+                    @media (max-width: 768px) {
+                        .cosmic-glow {
+                            width: 300px !important;
+                            height: 300px !important;
+                        }
+                        .contact-grid {
+                            grid-template-columns: 1fr !important;
+                            gap: 1rem !important;
+                        }
+                        .contact-card {
+                            grid-column: span 1 !important;
+                            padding: 2rem !important;
+                            border-radius: 2rem !important;
+                        }
+                        .hero-cta {
+                            grid-column: span 1 !important;
+                            padding: 2.5rem 2rem !important;
+                        }
+                        .cta-title {
+                            font-size: 2.2rem !important;
+                        }
+                        .cta-description {
+                            font-size: 1.1rem !important;
+                        }
+                        .location-card {
+                            grid-column: span 1 !important;
+                        }
+                        .linkedin-card {
+                            order: 1;
+                        }
+                        .instagram-card {
+                            order: 2;
+                        }
+                        .email-card {
+                            order: 3;
+                        }
+                        .phone-card {
+                            order: 4;
                         }
                     }
                 `}} />
