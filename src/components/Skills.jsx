@@ -71,7 +71,7 @@ const Skills = () => {
                     <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '1rem' }}>
                         Technical <span className="gradient-text">Arsenal</span>
                     </h2>
-                    <p style={{ color: '#a3a3a3', fontSize: '1.2rem' }}>
+                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem' }}>
                         Individual building blocks of my engineering journey
                     </p>
                 </motion.div>
@@ -105,11 +105,11 @@ const Skills = () => {
                                 alignItems: 'center',
                                 gap: '1rem',
                                 padding: '1rem 2rem',
-                                background: 'rgba(23, 23, 23, 0.4)',
+                                background: 'var(--surface-color)',
                                 backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '100px',
-                                color: '#fff',
+                                color: 'var(--text-color)',
                                 cursor: 'default',
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                             }}
@@ -129,18 +129,6 @@ const Skills = () => {
                 </motion.div>
             </div>
 
-            {/* Subtle Ambient Background Glow */}
-            <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '100%',
-                height: '100%',
-                background: 'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)',
-                zIndex: -1,
-                pointerEvents: 'none'
-            }} />
         </section>
     );
 };

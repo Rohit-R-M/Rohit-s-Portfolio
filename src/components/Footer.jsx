@@ -18,7 +18,8 @@ const Footer = () => {
                     Thanks for stopping by!
                 </h3>
                 <p style={{
-                    color: 'rgba(255, 255, 255, 0.5)',
+                    color: 'var(--text-dim)',
+                    opacity: 0.6,
                     fontSize: '0.9rem'
                 }}>
                     © {new Date().getFullYear()} Rohit Mantur. Built with passion and code.

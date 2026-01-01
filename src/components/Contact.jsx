@@ -45,9 +45,9 @@ const Contact = () => {
                             style={{
                                 gridColumn: 'span 8',
                                 gridRow: 'span 2',
-                                background: 'rgba(23, 23, 23, 0.4)',
+                                background: 'var(--surface-color)',
                                 backdropFilter: 'blur(20px)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '3rem',
                                 padding: '4rem',
                                 display: 'flex',
@@ -71,7 +71,7 @@ const Contact = () => {
                                 Let's build <br />
                                 <span className="gradient-text" style={{ fontSize: '1.1em' }}>something iconic.</span>
                             </h3>
-                            <p style={{ color: '#aaa', fontSize: '1.2rem', maxWidth: '450px', marginBottom: '3rem' }}>
+                            <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem', maxWidth: '450px', marginBottom: '3rem' }}>
                                 I'm always looking for ambitious projects and clever people to collaborate with. Let's make it happen.
                             </p>
 
@@ -108,9 +108,9 @@ const Contact = () => {
                             whileHover={{ y: -10, borderColor: '#0077b5' }}
                             style={{
                                 gridColumn: 'span 4',
-                                background: 'rgba(0, 119, 181, 0.03)',
+                                background: 'var(--surface-color)',
                                 backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '3rem',
                                 padding: '3rem',
                                 display: 'flex',
@@ -125,7 +125,7 @@ const Contact = () => {
                                 <Linkedin size={32} />
                             </div>
                             <div>
-                                <span style={{ color: '#666', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '0.2rem' }}>Professional</span>
+                                <span style={{ color: 'var(--text-dim)', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '0.2rem', opacity: 0.6 }}>Professional</span>
                                 <p style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '0.5rem' }}>Connect</p>
                             </div>
                         </motion.a>
@@ -140,8 +140,8 @@ const Contact = () => {
                             whileHover={{ y: -10, borderColor: '#e4405f' }}
                             style={{
                                 gridColumn: 'span 4',
-                                background: 'rgba(23, 23, 23, 0.6)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                background: 'var(--surface-color)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '2.5rem',
                                 padding: '2rem',
                                 display: 'flex',
@@ -161,8 +161,8 @@ const Contact = () => {
                         {/* LOCATION CARD */}
                         <div style={{
                             gridColumn: 'span 5',
-                            background: 'rgba(23, 23, 23, 0.6)',
-                            border: '1px solid rgba(255, 255, 255, 0.05)',
+                            background: 'var(--surface-color)',
+                            border: '1px solid var(--border-color)',
                             borderRadius: '2.5rem',
                             padding: '2.5rem',
                             display: 'flex',
@@ -173,7 +173,7 @@ const Contact = () => {
                                 <MapPin size={32} />
                             </div>
                             <div>
-                                <span style={{ color: '#666', fontSize: '0.8rem', textTransform: 'uppercase' }}>Location</span>
+                                <span style={{ color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', opacity: 0.6 }}>Location</span>
                                 <p style={{ fontSize: '1.2rem', fontWeight: '700' }}>Bagalkot, Karnataka, IN</p>
                             </div>
                         </div>
@@ -209,8 +209,8 @@ const Contact = () => {
                             whileHover={{ y: -10, borderColor: 'var(--primary-color)' }}
                             style={{
                                 gridColumn: 'span 4',
-                                background: 'rgba(23, 23, 23, 0.6)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                background: 'var(--surface-color)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '2.5rem',
                                 padding: '2rem',
                                 display: 'flex',
@@ -237,9 +237,9 @@ const Contact = () => {
                             whileHover={{ y: -10, borderColor: 'var(--primary-color)', background: 'rgba(59, 130, 246, 0.05)' }}
                             style={{
                                 gridColumn: 'span 12',
-                                background: 'rgba(23, 23, 23, 0.4)',
+                                background: 'var(--surface-color)',
                                 backdropFilter: 'blur(20px)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '2.5rem',
                                 padding: '2.5rem',
                                 display: 'flex',
@@ -266,7 +266,7 @@ const Contact = () => {
                             </div>
                             <div style={{ textAlign: 'left' }}>
                                 <p style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.2rem' }}>Download My Resume</p>
-                                <p style={{ color: '#666', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1rem' }}>Get a detailed look at my experience</p>
+                                <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1rem', opacity: 0.6 }}>Get a detailed look at my experience</p>
                             </div>
                             <div style={{
                                 marginLeft: 'auto',

@@ -14,7 +14,7 @@ const Education = () => {
             color: "#3b82f6"
         },
         {
-            degree: "Pre-University Education (PCME)",
+            degree: "Pre-University Education (PCMC)",
             institution: "Tejas International PU College",
             duration: "2020 - 2022",
             grade: "First Class",
@@ -34,7 +34,7 @@ const Education = () => {
     ];
 
     return (
-        <section id="education" style={{ padding: '8rem 0', position: 'relative', overflow: 'hidden' }}>
+        <section id="education" style={{ padding: '8rem 0', position: 'relative' }}>
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -45,7 +45,7 @@ const Education = () => {
                     <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '1rem' }}>
                         Academic <span className="gradient-text">Journey</span>
                     </h2>
-                    <p style={{ color: '#a3a3a3', fontSize: '1.2rem' }}>
+                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem' }}>
                         Foundation of my technical expertise and engineering mindset
                     </p>
                 </motion.div>
@@ -89,9 +89,9 @@ const Education = () => {
                                 />
 
                                 <div style={{
-                                    background: 'rgba(23, 23, 23, 0.4)',
+                                    background: 'var(--surface-color)',
                                     backdropFilter: 'blur(10px)',
-                                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                                    border: '1px solid var(--border-color)',
                                     borderRadius: '2rem',
                                     padding: '2.5rem',
                                     transition: 'transform 0.3s ease',
@@ -111,7 +111,7 @@ const Education = () => {
 
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
                                         <div>
-                                            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '0.5rem', color: '#fff' }}>
+                                            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '0.5rem', color: 'var(--text-color)' }}>
                                                 {item.degree}
                                             </h3>
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: item.color, fontWeight: '600' }}>
@@ -119,17 +119,17 @@ const Education = () => {
                                                 <span>{item.institution}</span>
                                             </div>
                                         </div>
-                                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.5rem 1rem', borderRadius: '100px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#888', fontSize: '0.9rem' }}>
+                                        <div style={{ background: 'rgba(128,128,128,0.1)', padding: '0.5rem 1rem', borderRadius: '100px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-dim)', fontSize: '0.9rem' }}>
                                             <Calendar size={14} />
                                             <span>{item.duration}</span>
                                         </div>
                                     </div>
 
-                                    <p style={{ color: '#a3a3a3', lineHeight: '1.7', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
+                                    <p style={{ color: 'var(--text-dim)', lineHeight: '1.7', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
                                         {item.description}
                                     </p>
 
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', color: '#666', fontSize: '0.9rem', flexWrap: 'wrap' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', color: 'var(--text-dim)', fontSize: '0.9rem', opacity: 0.8, flexWrap: 'wrap' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                             <MapPin size={14} />
                                             <span>{item.location}</span>
@@ -145,20 +145,6 @@ const Education = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Ambient background decoration */}
-            <div style={{
-                position: 'absolute',
-                top: '50%',
-                right: '-10%',
-                width: '400px',
-                height: '400px',
-                background: 'radial-gradient(circle, var(--secondary-color) 0%, transparent 70%)',
-                opacity: 0.05,
-                filter: 'blur(80px)',
-                zIndex: -1,
-                pointerEvents: 'none'
-            }} />
         </section>
     );
 };

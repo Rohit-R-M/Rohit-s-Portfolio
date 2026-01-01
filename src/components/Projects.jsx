@@ -69,16 +69,16 @@ const ProjectCard = ({ project, index }) => {
             }}
             whileHover={{ y: -10 }}
             style={{
-                background: 'rgba(23, 23, 23, 0.6)',
+                background: 'var(--surface-color)',
                 backdropFilter: 'blur(20px)',
                 borderRadius: '2.5rem',
-                border: '1px solid rgba(255, 255, 255, 0.05)',
+                border: '1px solid var(--border-color)',
                 overflow: 'hidden',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)'
             }}
         >
             {/* Top Color Accent Bar */}
@@ -119,7 +119,7 @@ const ProjectCard = ({ project, index }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + (index * 0.1) }}
-                    style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '1.2rem', letterSpacing: '-0.5px' }}
+                    style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '1.2rem', letterSpacing: '-0.5px', color: 'var(--text-color)' }}
                 >
                     {project.title}
                 </motion.h3>
@@ -129,7 +129,7 @@ const ProjectCard = ({ project, index }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.6 + (index * 0.1) }}
-                    style={{ color: '#a3a3a3', lineHeight: 1.7, marginBottom: '2.5rem', fontSize: '1.05rem', flex: 1 }}
+                    style={{ color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: '2.5rem', fontSize: '1.05rem', flex: 1 }}
                 >
                     {project.description}
                 </motion.p>
@@ -158,10 +158,10 @@ const ProjectCard = ({ project, index }) => {
                             style={{
                                 fontSize: '0.75rem',
                                 padding: '0.4rem 1.2rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'rgba(128,128,128,0.05)',
                                 borderRadius: '10px',
                                 border: `1px solid ${project.color}33`,
-                                color: '#aaa',
+                                color: 'var(--text-dim)',
                                 fontWeight: '600',
                                 transition: 'all 0.4s ease',
                                 cursor: 'default'
@@ -186,7 +186,7 @@ const ProjectCard = ({ project, index }) => {
                         rel="noopener noreferrer"
                         whileHover={{ rotate: 360, scale: 1.2, color: project.color }}
                         transition={{ duration: 0.6 }}
-                        style={{ color: '#888' }}
+                        style={{ color: 'var(--text-dim)' }}
                     >
                         <Github size={28} />
                     </motion.a>
@@ -198,7 +198,7 @@ const ProjectCard = ({ project, index }) => {
 
 const Projects = () => {
     return (
-        <section id="projects" style={{ padding: '8rem 0', overflow: 'hidden', position: 'relative' }}>
+        <section id="projects" style={{ padding: '8rem 0', position: 'relative' }}>
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <div style={{ textAlign: 'center', marginBottom: '8rem' }}>
                     <motion.h2

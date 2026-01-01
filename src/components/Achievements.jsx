@@ -42,7 +42,7 @@ const Achievements = () => {
                     <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '1rem' }}>
                         Major <span className="gradient-text">Milestones</span>
                     </h2>
-                    <p style={{ color: '#a3a3a3', fontSize: '1.2rem' }}>
+                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem' }}>
                         Recognition of my passion for building and solving
                     </p>
                 </motion.div>
@@ -61,9 +61,9 @@ const Achievements = () => {
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             whileHover={{ y: -10 }}
                             style={{
-                                background: 'rgba(23, 23, 23, 0.4)',
+                                background: 'var(--surface-color)',
                                 backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '2.5rem',
                                 padding: '3rem',
                                 position: 'relative',
@@ -71,7 +71,7 @@ const Achievements = () => {
                                 height: '100%',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
+                                boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
                             }}
                         >
                             {/* Accent Glow */}
@@ -105,17 +105,17 @@ const Achievements = () => {
                             <div style={{ flex: 1 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                                     <div>
-                                        <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.4rem', color: '#fff' }}>
+                                        <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.4rem', color: 'var(--text-color)' }}>
                                             {item.title}
                                         </h3>
                                         <p style={{ color: item.color, fontSize: '0.9rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                             {item.organization}
                                         </p>
                                     </div>
-                                    <span style={{ fontSize: '0.85rem', color: '#666', fontWeight: '600' }}>{item.date}</span>
+                                    <span style={{ fontSize: '0.85rem', color: 'var(--text-dim)', fontWeight: '600', opacity: 0.6 }}>{item.date}</span>
                                 </div>
 
-                                <p style={{ color: '#a3a3a3', lineHeight: '1.7', fontSize: '1.05rem' }}>
+                                <p style={{ color: 'var(--text-dim)', lineHeight: '1.7', fontSize: '1.05rem' }}>
                                     {item.description}
                                 </p>
                             </div>

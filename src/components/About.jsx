@@ -13,7 +13,7 @@ const About = () => {
                     alignItems: 'center'
                 }}>
 
-                    {/* Image Column - Cosmic Portal Design */}
+                    {/* Image Column - Nature-Inspired Design */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -22,53 +22,70 @@ const About = () => {
                         style={{ display: 'flex', justifyContent: 'center', position: 'relative', alignItems: 'center' }}
                         className="about-image-column"
                     >
-                        {/* Outer Pulsing Aura */}
+                        {/* Nature Aura */}
                         <motion.div
                             animate={{
                                 scale: [1, 1.1, 1],
-                                opacity: [0.2, 0.4, 0.2]
+                                opacity: [0.1, 0.25, 0.1]
                             }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                             style={{
                                 position: 'absolute',
                                 width: '450px',
                                 height: '450px',
-                                background: 'radial-gradient(circle, var(--primary-color) 0%, transparent 70%)',
+                                background: 'radial-gradient(circle, #10b981 0%, transparent 70%)',
                                 filter: 'blur(60px)',
                                 zIndex: 0
                             }}
                         />
 
-                        {/* Spinning Orbital Ring 1 (Dashed) */}
+                        {/* Sunlight Glow */}
+                        <motion.div
+                            animate={{
+                                scale: [1.1, 1, 1.1],
+                                opacity: [0.05, 0.15, 0.05]
+                            }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                            style={{
+                                position: 'absolute',
+                                width: '500px',
+                                height: '500px',
+                                background: 'radial-gradient(circle, #f59e0b 0%, transparent 70%)',
+                                filter: 'blur(80px)',
+                                zIndex: 0
+                            }}
+                        />
+
+                        {/* Spinning Nature Ring 1 */}
                         <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                             style={{
                                 position: 'absolute',
                                 width: '380px',
                                 height: '380px',
-                                border: '2px dashed rgba(59, 130, 246, 0.3)',
+                                border: '2px dashed rgba(16, 185, 129, 0.2)',
                                 borderRadius: '50%',
                                 zIndex: 1
                             }}
                         />
 
-                        {/* Spinning Orbital Ring 2 (Solid Glow) */}
+                        {/* Spinning Nature Ring 2 */}
                         <motion.div
                             animate={{ rotate: -360 }}
-                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
                             style={{
                                 position: 'absolute',
                                 width: '340px',
                                 height: '340px',
-                                border: '1px solid rgba(139, 92, 246, 0.4)',
+                                border: '1px solid rgba(132, 204, 22, 0.3)',
                                 borderRadius: '50%',
-                                boxShadow: '0 0 20px rgba(139, 92, 246, 0.2)',
+                                boxShadow: '0 0 20px rgba(132, 204, 22, 0.1)',
                                 zIndex: 1
                             }}
                         />
 
-                        {/* Image Container (The Portal) */}
+                        {/* Image Container */}
                         <motion.div
                             whileHover={{ scale: 1.05, rotate: 2 }}
                             style={{
@@ -76,12 +93,12 @@ const About = () => {
                                 height: '300px',
                                 borderRadius: '50%',
                                 padding: '10px',
-                                background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02))',
+                                background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(16, 185, 129, 0.05))',
                                 backdropFilter: 'blur(10px)',
                                 border: '1px solid rgba(255,255,255,0.2)',
                                 position: 'relative',
                                 zIndex: 2,
-                                boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+                                boxShadow: '0 20px 50px rgba(0,0,0,0.3)'
                             }}
                         >
                             <div style={{
@@ -90,7 +107,7 @@ const About = () => {
                                 borderRadius: '50%',
                                 overflow: 'hidden',
                                 position: 'relative',
-                                border: '2px solid rgba(255, 255, 255, 0.1)'
+                                border: '2px solid rgba(132, 204, 22, 0.2)'
                             }}>
                                 <img
                                     src="/my.jpg"
@@ -99,25 +116,25 @@ const About = () => {
                                         width: '100%',
                                         height: '100%',
                                         objectFit: 'cover',
-                                        filter: 'contrast(1.1) brightness(1.1)'
+                                        filter: 'contrast(1.05) brightness(1.05)'
                                     }}
                                 />
-                                {/* Glass Shine Overlay */}
+                                {/* Soft Sunlight Overlay */}
                                 <div style={{
                                     position: 'absolute',
                                     inset: 0,
-                                    background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%)',
+                                    background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, transparent 60%)',
                                     pointerEvents: 'none'
                                 }} />
                             </div>
                         </motion.div>
 
-                        {/* Orbiting Tech Dots */}
+                        {/* Orbiting Nature Dots */}
                         {[0, 120, 240].map((angle, i) => (
                             <motion.div
                                 key={i}
                                 animate={{ rotate: [angle, angle + 360] }}
-                                transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "linear" }}
+                                transition={{ duration: 12 + i * 2, repeat: Infinity, ease: "linear" }}
                                 style={{
                                     position: 'absolute',
                                     width: '400px',
@@ -131,9 +148,9 @@ const About = () => {
                                     left: '50%',
                                     width: '8px',
                                     height: '8px',
-                                    background: i % 2 === 0 ? 'var(--primary-color)' : 'var(--secondary-color)',
+                                    background: i % 2 === 0 ? '#10b981' : '#f59e0b',
                                     borderRadius: '50%',
-                                    boxShadow: `0 0 10px ${i % 2 === 0 ? 'var(--primary-color)' : 'var(--secondary-color)'}`
+                                    boxShadow: `0 0 12px ${i % 2 === 0 ? '#10b981' : '#f59e0b'}`
                                 }} />
                             </motion.div>
                         ))}
@@ -159,12 +176,12 @@ const About = () => {
 
                         <div style={{
                             fontSize: '1.2rem',
-                            color: '#d4d4d4',
+                            color: 'var(--text-dim)',
                             lineHeight: '1.8',
-                            background: 'rgba(255, 255, 255, 0.02)',
+                            background: 'var(--surface-color)',
                             padding: '3.5rem',
                             borderRadius: '2.5rem',
-                            border: '1px solid rgba(255, 255, 255, 0.05)',
+                            border: '1px solid var(--border-color)',
                             backdropFilter: 'blur(5px)'
                         }}>
                             <motion.p
@@ -217,7 +234,7 @@ const About = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         whileHover={{ scale: 1.2, color: 'var(--primary-color)', y: -5 }}
-                                        style={{ color: '#a3a3a3', transition: 'color 0.3s' }}
+                                        style={{ color: 'var(--text-dim)', transition: 'color 0.3s' }}
                                     >
                                         <Icon size={32} />
                                     </motion.a>
