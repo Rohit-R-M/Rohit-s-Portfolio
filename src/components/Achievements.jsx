@@ -10,7 +10,7 @@ const Achievements = () => {
             date: "2025",
             description: "Secured 1st place in a major project competition for developing 'SAM', a comprehensive academic management system recognized for its practical utility and technical execution.",
             icon: <Award size={24} />,
-            color: "#3b82f6" // Blue
+            color: "#3b82f6"
         },
         {
             title: "3rd Place - Hackathon",
@@ -18,7 +18,7 @@ const Achievements = () => {
             date: "2025",
             description: "Achieved 3rd place in a competitive hackathon by pitching and demonstrating the core functionalities of the Student Academics Management system.",
             icon: <Zap size={24} />,
-            color: "#8b5cf6" // Violet
+            color: "#8b5cf6"
         },
         {
             title: "1st Place - Quiz Competition",
@@ -26,7 +26,33 @@ const Achievements = () => {
             date: "2025",
             description: "Secured 1st place in a technical quiz competition, showcasing quick thinking and a strong grasp of computer science and general technology concepts.",
             icon: <Award size={24} />,
-            color: "#10b981" // Emerald
+            color: "#10b981"
+        },
+        {
+            title: "Privacy and Security in Online Social Media",
+            organization: "NPTEL",
+            date: "2024",
+            score: "72%",
+            description: "Successfully identified privacy risks and implemented security protocols for online social platforms in this comprehensive certification.",
+            icon: <Award size={24} />,
+            color: "#06b6d4"
+        },
+        {
+            title: "Wildlife Ecology",
+            organization: "NPTEL",
+            date: "2025",
+            score: "91%",
+            description: "Explored foundational knowledge in ecology, conservation strategies, and the delicate balance of natural ecosystems.",
+            icon: <Star size={24} />,
+            color: "#10b981"
+        },
+        {
+            title: "Flutter Application Development",
+            organization: "Infosys Springboard",
+            date: "2024",
+            description: "Developed proficiency in building high-performance, cross-platform mobile applications using the Flutter framework and Dart.",
+            icon: <Trophy size={24} />,
+            color: "#f59e0b"
         }
     ];
 
@@ -108,11 +134,26 @@ const Achievements = () => {
                                         <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.4rem', color: 'var(--text-color)' }}>
                                             {item.title}
                                         </h3>
-                                        <p style={{ color: item.color, fontSize: '0.9rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                                            {item.organization}
-                                        </p>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+                                            <p style={{ color: item.color, fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                                {item.organization}
+                                            </p>
+                                            {item.score && (
+                                                <span style={{
+                                                    fontSize: '0.7rem',
+                                                    background: `${item.color}20`,
+                                                    color: item.color,
+                                                    padding: '0.2rem 0.6rem',
+                                                    borderRadius: '100px',
+                                                    fontWeight: '800',
+                                                    border: `1px solid ${item.color}40`
+                                                }}>
+                                                    SCORE: {item.score}
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
-                                    <span style={{ fontSize: '0.85rem', color: 'var(--text-dim)', fontWeight: '600', opacity: 0.6 }}>{item.date}</span>
+                                    <span style={{ fontSize: '0.85rem', color: 'var(--text-dim)', fontWeight: '600', opacity: 0.6, whiteSpace: 'nowrap' }}>{item.date}</span>
                                 </div>
 
                                 <p style={{ color: 'var(--text-dim)', lineHeight: '1.7', fontSize: '1.05rem' }}>
@@ -124,7 +165,6 @@ const Achievements = () => {
                 </div>
             </div>
 
-            {/* Decorative background circle */}
             <div style={{
                 position: 'absolute',
                 bottom: '10%',

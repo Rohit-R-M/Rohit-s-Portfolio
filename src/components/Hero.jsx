@@ -166,7 +166,7 @@ const Hero = () => {
                         ]} />
                         <br />
                         <span style={{ fontSize: '1.1rem', color: 'var(--text-dim)', fontWeight: '400' }}>
-                            with strong fundamentals in Computer Networks, DSA, and system-level concepts.
+                            Strong, Determined, and No Excuses.
                         </span>
                     </motion.p>
                     <motion.div
