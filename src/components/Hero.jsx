@@ -61,7 +61,7 @@ const Hero = () => {
             id="home"
             style={{
                 minHeight: '85vh',
-                padding: '15rem 0 6rem 0',
+                padding: '12rem 0 6rem 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
