@@ -4,30 +4,67 @@ import { Sun, Moon } from 'lucide-react';
 
 const Navbar = ({ theme, toggleTheme }) => {
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
+
+    const navLinks = [
+        { name: 'Home', id: 'home' },
+        { name: 'About', id: 'about' },
+        { name: 'Education', id: 'education' },
+        { name: 'Skills', id: 'skills' },
+        { name: 'Projects', id: 'projects' },
+        { name: 'Achievements', id: 'achievements' },
+        { name: 'Contact', id: 'contact' }
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
+
+        const observerOptions = {
+            threshold: 0.1, // Trigger as soon as 10% is visible
+            rootMargin: '-5% 0px -45% 0px' // Wider window for detection
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        navLinks.forEach((link) => {
+            const el = document.getElementById(link.id);
+            if (el) observer.observe(el);
+        });
+
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            observer.disconnect();
+        };
     }, []);
+
+    const handleClick = (id) => {
+        setActiveSection(id);
+    };
 
     return (
         <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             style={{
                 position: 'fixed',
                 top: 0,
                 left: 0,
                 right: 0,
                 zIndex: 100,
-                padding: '1.5rem 4rem',
-                transition: 'all 0.3s ease',
+                padding: '0.8rem 4rem',
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 background: scrolled ? 'var(--nav-bg)' : 'transparent',
-                backdropFilter: scrolled ? 'blur(10px)' : 'none',
+                backdropFilter: scrolled ? 'blur(15px)' : 'none',
                 borderBottom: scrolled ? '1px solid var(--border-color)' : 'none',
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -36,22 +73,110 @@ const Navbar = ({ theme, toggleTheme }) => {
             className="navbar"
         >
             <style>{`
+                @media (max-width: 1024px) {
+                    .navbar { padding: 0.6rem 2rem !important; }
+                    .nav-links { gap: 1.5rem !important; }
+                }
                 @media (max-width: 768px) {
-                    .navbar {
-                        padding: 1rem 1.5rem !important;
-                    }
+                    .nav-links { display: none !important; }
                 }
             `}</style>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', zIndex: 60 }}>
-                <a href="#">Rohit<span style={{ color: 'var(--primary-color)' }}>.</span></a>
+
+            {/* Logo with Staggered Letters */}
+            <div style={{ fontSize: '1.6rem', fontWeight: '800', zIndex: 60, letterSpacing: '-0.5px' }}>
+                <a
+                    href="#home"
+                    onClick={() => handleClick('home')}
+                    style={{ color: 'var(--text-color)', textDecoration: 'none', display: 'flex' }}
+                >
+                    {"Rohit".split("").map((char, i) => (
+                        <motion.span
+                            key={i}
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 + i * 0.05, duration: 0.5 }}
+                        >
+                            {char}
+                        </motion.span>
+                    ))}
+                    <motion.span
+                        initial={{ scale: 0, rotate: -45 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 400, delay: 0.5 }}
+                        style={{ color: 'var(--primary-color)' }}
+                    >
+                        .
+                    </motion.span>
+                </a>
+            </div>
+
+            {/* Desktop Nav Links with Glow Active State */}
+            <div className="nav-links" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                {navLinks.map((link, i) => (
+                    <div key={link.id} style={{ position: 'relative' }}>
+                        <motion.a
+                            href={`#${link.id}`}
+                            onClick={() => handleClick(link.id)}
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
+                            whileHover={{ y: -1 }}
+                            style={{
+                                color: 'var(--text-color)',
+                                textDecoration: 'none',
+                                fontSize: '0.85rem',
+                                fontWeight: '700',
+                                opacity: activeSection === link.id ? 1 : 0.5,
+                                transition: 'all 0.3s ease',
+                                padding: '0.6rem 1rem',
+                                display: 'block',
+                                position: 'relative',
+                                zIndex: 2,
+                            }}
+                        >
+                            {link.name}
+                        </motion.a>
+
+                        {activeSection === link.id && (
+                            <motion.div
+                                layoutId="nav-box-highlight"
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 400,
+                                    damping: 14,
+                                    mass: 1.2
+                                }}
+                                style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    background: theme === 'dark'
+                                        ? 'rgba(255, 255, 255, 0.12)'
+                                        : 'rgba(0, 0, 0, 0.06)',
+                                    borderRadius: '12px',
+                                    border: theme === 'dark'
+                                        ? '1px solid rgba(255, 255, 255, 0.25)'
+                                        : '1px solid rgba(0, 0, 0, 0.08)',
+                                    boxShadow: theme === 'dark'
+                                        ? '0 0 20px rgba(255, 255, 255, 0.1)'
+                                        : '0 4px 12px rgba(0, 0, 0, 0.05)',
+                                    backdropFilter: 'blur(10px)',
+                                    zIndex: 1
+                                }}
+                            />
+                        )}
+                    </div>
+                ))}
             </div>
 
             <motion.button
-                whileHover={{ scale: 1.1 }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.8, type: "spring" }}
+                whileHover={{ scale: 1.15, rotate: 15 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme}
                 style={{
-                    padding: '0.8rem',
+                    padding: '0.65rem',
                     borderRadius: '50%',
                     background: 'var(--surface-color)',
                     border: '1px solid var(--border-color)',
@@ -59,10 +184,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
                 }}
             >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
             </motion.button>
         </motion.nav>
     );

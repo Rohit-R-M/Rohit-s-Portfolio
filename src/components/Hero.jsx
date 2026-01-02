@@ -58,15 +58,16 @@ const Typewriter = ({ texts, delay = 100, waitTime = 2000 }) => {
 const Hero = () => {
     return (
         <section
+            id="home"
             style={{
-                minHeight: '90vh',
-                padding: '12rem 0 4rem 0',
+                minHeight: '85vh',
+                padding: '15rem 0 6rem 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: 'transparent',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'visible'
             }}
         >
             {/* Main Content */}
@@ -100,29 +101,47 @@ const Hero = () => {
 
                     <motion.h1
                         style={{
-                            fontSize: 'clamp(4rem, 12vw, 8rem)',
-                            fontWeight: '900',
-                            lineHeight: 0.8,
+                            fontSize: 'clamp(3.5rem, 15vw, 10rem)',
+                            fontWeight: '700',
+                            lineHeight: 1,
                             marginBottom: '2.5rem',
+                            fontFamily: "'Dancing Script', cursive",
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: '0.2em',
+                            textTransform: 'none',
+                            filter: 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.4))',
+                            whiteSpace: 'nowrap'
                         }}
                     >
+                        {/* Rohit - Writing Reveal */}
                         <motion.span
-                            initial={{ opacity: 0, scale: 1.1, filter: 'blur(20px)', letterSpacing: '20px' }}
-                            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)', letterSpacing: '-2px' }}
-                            transition={{ duration: 1.5, ease: "easeOut", delay: 0.4 }}
-                            style={{ display: 'inline-block' }}
+                            initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0, x: -10 }}
+                            animate={{ clipPath: 'inset(0 0% 0 0)', opacity: 1, x: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                ease: [0.45, 0, 0.55, 1],
+                                delay: 0.5
+                            }}
+                            style={{ display: 'inline-block', padding: '0 15px' }}
                         >
-                            ROHIT
+                            Rohit
                         </motion.span>
-                        <br />
+
+                        {/* Mantur - Writing Reveal */}
                         <motion.span
-                            initial={{ opacity: 0, scale: 1.1, filter: 'blur(20px)', letterSpacing: '20px' }}
-                            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)', letterSpacing: '-2px' }}
-                            transition={{ duration: 1.5, ease: "easeOut", delay: 0.6 }}
+                            initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0, x: 10 }}
+                            animate={{ clipPath: 'inset(0 0% 0 0)', opacity: 1, x: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                ease: [0.45, 0, 0.55, 1],
+                                delay: 1.2
+                            }}
                             className="gradient-text hero-name"
-                            style={{ display: 'inline-block' }}
+                            style={{ display: 'inline-block', padding: '0 15px' }}
                         >
-                            MANTUR
+                            Mantur
                         </motion.span>
                     </motion.h1>
 

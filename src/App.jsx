@@ -27,8 +27,23 @@ function App() {
       <GalaxyBackground theme={theme} />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
-        {/* Unified Hero & About flow */}
-        <div style={{ position: 'relative' }}>
+        {/* Unified Hero & About block with shared atmosphere */}
+        <div style={{ position: 'relative', width: '100%' }}>
+          {/* Connecting Glow between Hero and About */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '60vw',
+            height: '60vw',
+            background: theme === 'dark'
+              ? 'radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%)',
+            filter: 'blur(100px)',
+            pointerEvents: 'none',
+            zIndex: 0
+          }} />
           <Hero />
           <About />
         </div>

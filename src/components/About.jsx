@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const About = () => {
     return (
-        <section id="about" style={{ padding: '4rem 0 8rem 0', minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
+        <section id="about" style={{ padding: '6rem 0 8rem 0', minHeight: '90vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <div className="about-grid">
                     <style>{`
@@ -95,29 +95,63 @@ const About = () => {
                             }}
                         />
 
-                        {/* Image Container */}
+                        {/* Image Container with Animated Neon Border */}
                         <motion.div
-                            whileHover={{ scale: 1.05, rotate: 2 }}
+                            whileHover={{ scale: 1.05 }}
                             style={{
-                                width: '300px',
-                                height: '300px',
+                                width: '320px',
+                                height: '320px',
                                 borderRadius: '50%',
-                                padding: '10px',
-                                background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(16, 185, 129, 0.05))',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255,255,255,0.2)',
                                 position: 'relative',
                                 zIndex: 2,
-                                boxShadow: '0 20px 50px rgba(0,0,0,0.3)'
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                background: 'rgba(255, 255, 255, 0.03)',
+                                backdropFilter: 'blur(10px)',
+                                boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
                             }}
                         >
+                            {/* Inner Rotating Ring */}
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                style={{
+                                    position: 'absolute',
+                                    width: '100%',
+                                    height: '100%',
+                                    borderRadius: '50%',
+                                    padding: '3px',
+                                    background: 'conic-gradient(from 0deg, transparent, var(--primary-color), transparent, var(--accent-color), transparent)',
+                                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                    WebkitMaskComposite: 'destination-out',
+                                    maskComposite: 'exclude',
+                                }}
+                            />
+
+                            {/* Outer Pulsing Glow */}
+                            <motion.div
+                                animate={{ scale: [1, 1.02, 1], opacity: [0.3, 0.6, 0.3] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                                style={{
+                                    position: 'absolute',
+                                    width: '105%',
+                                    height: '105%',
+                                    borderRadius: '50%',
+                                    border: '2px solid var(--primary-color)',
+                                    filter: 'blur(8px)',
+                                    opacity: 0.5
+                                }}
+                            />
+
                             <div style={{
-                                width: '100%',
-                                height: '100%',
+                                width: '280px',
+                                height: '280px',
                                 borderRadius: '50%',
                                 overflow: 'hidden',
                                 position: 'relative',
-                                border: '2px solid rgba(132, 204, 22, 0.2)'
+                                border: '4px solid rgba(255, 255, 255, 0.1)',
+                                boxShadow: 'inset 0 0 20px rgba(0,0,0,0.4)'
                             }}>
                                 <img
                                     src="my.jpg"
@@ -126,16 +160,22 @@ const About = () => {
                                         width: '100%',
                                         height: '100%',
                                         objectFit: 'cover',
-                                        filter: 'contrast(1.05) brightness(1.05)'
+                                        filter: 'contrast(1.1) brightness(1.05)'
                                     }}
                                 />
-                                {/* Soft Sunlight Overlay */}
-                                <div style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, transparent 60%)',
-                                    pointerEvents: 'none'
-                                }} />
+                                {/* Glass Shimmer Overlay */}
+                                <motion.div
+                                    animate={{ left: ['-100%', '200%'] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        width: '50%',
+                                        height: '100%',
+                                        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+                                        transform: 'skewX(-20deg)'
+                                    }}
+                                />
                             </div>
                         </motion.div>
 
