@@ -60,17 +60,37 @@ const Achievements = () => {
         <section id="achievements" style={{ padding: '8rem 0', position: 'relative' }}>
             <div className="container">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     style={{ textAlign: 'center', marginBottom: '6rem' }}
                 >
-                    <h2 style={{ fontSize: 'clamp(2.2rem, 8vw, 3.5rem)', fontWeight: '900', marginBottom: '1rem' }}>
-                        Major <span className="gradient-text">Milestones</span>
-                    </h2>
-                    <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem', padding: '0 1rem' }}>
+                    <div style={{ overflow: 'hidden', display: 'inline-block' }}>
+                        <motion.h2
+                            initial={{ y: "100%", opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                            style={{
+                                fontSize: 'clamp(2.2rem, 8vw, 3.5rem)',
+                                fontWeight: '900',
+                                marginBottom: '1rem',
+                                filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.1))'
+                            }}
+                        >
+                            Major <span className="gradient-text">Milestones</span>
+                        </motion.h2>
+                    </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3, duration: 1 }}
+                        style={{ color: 'var(--text-dim)', fontSize: '1.2rem', padding: '0 1rem' }}
+                    >
                         Recognition of my passion for building and solving
-                    </p>
+                    </motion.p>
                 </motion.div>
 
                 <div style={{
@@ -81,14 +101,18 @@ const Achievements = () => {
                     {achievements.map((item, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            whileHover={{ y: -10 }}
+                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            whileHover={{
+                                y: -10,
+                                scale: 1.02,
+                                transition: { duration: 0.4, ease: "easeOut" }
+                            }}
                             style={{
                                 background: 'var(--surface-color)',
-                                backdropFilter: 'blur(10px)',
+                                backdropFilter: 'blur(15px)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '2.5rem',
                                 padding: '3rem',
@@ -97,9 +121,33 @@ const Achievements = () => {
                                 height: '100%',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+                                boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+                                cursor: 'default'
                             }}
                         >
+                            {/* Shimmer Highlight */}
+                            <motion.div
+                                animate={{
+                                    x: ['-200%', '200%'],
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                    repeatDelay: 2
+                                }}
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: '50%',
+                                    height: '100%',
+                                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)',
+                                    transform: 'skewX(-20deg)',
+                                    pointerEvents: 'none',
+                                    zIndex: 1
+                                }}
+                            />
                             {/* Accent Glow */}
                             <div style={{
                                 position: 'absolute',

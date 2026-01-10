@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, X, Maximize2 } from 'lucide-react';
+import { Github, X, Maximize2, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const BASE_PATH = import.meta.env.BASE_URL;
 
@@ -61,82 +61,88 @@ const projects = [
     }
 ];
 
-const ProjectCard = ({ project, index, onClick }) => {
-    const xOffset = index % 2 === 0 ? -100 : 100;
-
+const ProjectCard = ({ project, isActive, isPrev, isNext, onClick }) => {
     return (
         <motion.div
             className="project-card"
-            initial={{ opacity: 0, x: xOffset, rotate: index % 2 === 0 ? -2 : 2 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{
-                duration: 1,
-                delay: index * 0.1,
-                ease: [0.16, 1, 0.3, 1]
+            animate={{
+                scale: isActive ? 1.05 : 0.75,
+                opacity: isActive ? 1 : 0.3,
+                zIndex: isActive ? 20 : isPrev || isNext ? 10 : 1,
+                rotateY: isPrev ? 25 : isNext ? -25 : 0,
+                x: isPrev ? '-85%' : isNext ? '-15%' : '-50%',
+                filter: isActive ? 'blur(0px)' : 'blur(4px)',
+                y: isActive ? [0, -15, 0] : 0
             }}
-            whileHover={{ y: -10 }}
-            onClick={() => onClick(project)}
+            transition={{
+                x: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+                scale: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+                rotateY: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+                opacity: { duration: 0.8 },
+                y: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+            }}
+            onClick={onClick}
             style={{
                 background: 'var(--surface-color)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '2rem',
+                backdropFilter: 'blur(30px)',
+                borderRadius: '3rem',
                 border: '1px solid var(--border-color)',
                 overflow: 'hidden',
-                height: '100%',
+                width: 'min(100%, 750px)',
+                height: '520px',
+                position: 'absolute',
+                left: '50%',
+                cursor: isActive ? 'pointer' : 'default',
+                boxShadow: isActive
+                    ? `0 50px 100px -20px rgba(0, 0, 0, 0.4), 0 0 40px ${project.color}20`
+                    : '0 20px 40px rgba(0, 0, 0, 0.1)',
                 display: 'flex',
-                flexDirection: 'column',
-                position: 'relative',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
-                cursor: 'pointer'
+                pointerEvents: isActive ? 'auto' : 'none'
             }}
         >
-            {/* Project Image Preview */}
-            <div style={{ position: 'relative', height: '240px', overflow: 'hidden' }}>
-                <img
+            {/* Shimmer Effect */}
+            {isActive && (
+                <motion.div
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '200%' }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)',
+                        zIndex: 5,
+                        pointerEvents: 'none'
+                    }}
+                />
+            )}
+
+            {/* Left: Project Image */}
+            <div className="card-image-wrapper" style={{ width: '45%', position: 'relative', overflow: 'hidden' }}>
+                <motion.img
                     src={project.image}
                     alt={project.title}
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.5s ease'
-                    }}
-                    className="project-img"
+                    animate={{ scale: isActive ? 1.05 : 1 }}
+                    transition={{ duration: 1 }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: `linear-gradient(to bottom, transparent 0%, ${project.color}33 100%)`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: 0,
-                    transition: 'opacity 0.3s ease'
-                }} className="img-overlay">
-                    <Maximize2 color="white" size={32} />
-                </div>
+                    background: `linear-gradient(to right, transparent, rgba(0,0,0,0.3))`
+                }} />
             </div>
 
-            {/* Top Color Accent Bar */}
-            <div style={{
-                height: '4px',
-                width: '100%',
-                background: project.color,
-                opacity: 0.8
-            }} />
-
-            {/* Content Section */}
-            <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+            {/* Right: Content */}
+            <div className="card-content-wrapper" style={{ width: '55%', padding: '3rem', display: 'flex', flexDirection: 'column' }}>
                 <div style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.75rem',
                     fontWeight: '800',
                     color: project.color,
                     textTransform: 'uppercase',
-                    letterSpacing: '1.5px',
+                    letterSpacing: '3px',
                     marginBottom: '1rem',
                     background: `${project.color}15`,
-                    padding: '0.4rem 1rem',
+                    padding: '0.4rem 1.2rem',
                     borderRadius: '100px',
                     width: 'fit-content',
                     border: `1px solid ${project.color}30`
@@ -144,46 +150,55 @@ const ProjectCard = ({ project, index, onClick }) => {
                     {project.category}
                 </div>
 
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '1rem', color: 'var(--text-color)' }}>
+                <h3 style={{ fontSize: '2.2rem', fontWeight: '900', marginBottom: '1.2rem', color: 'var(--text-color)', lineHeight: 1.1 }}>
                     {project.title}
                 </h3>
 
-                <p style={{ color: 'var(--text-dim)', lineHeight: 1.6, marginBottom: '2rem', fontSize: '0.95rem', flex: 1 }}>
+                <p className="project-desc" style={{ color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: '2rem', fontSize: '1rem' }}>
                     {project.description}
                 </p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '2rem' }}>
-                    {project.tags.slice(0, 3).map((tag) => (
+                <div className="tags-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: 'auto' }}>
+                    {project.tags.slice(0, 4).map((tag) => (
                         <span key={tag} style={{
                             fontSize: '0.7rem',
-                            padding: '0.3rem 0.8rem',
-                            background: 'rgba(128,128,128,0.05)',
-                            borderRadius: '8px',
+                            padding: '0.4rem 0.9rem',
+                            background: 'rgba(255,255,255,0.03)',
+                            borderRadius: '10px',
                             border: `1px solid var(--border-color)`,
-                            color: 'var(--text-dim)',
+                            color: 'var(--text-color)',
                             fontWeight: '600'
                         }}>
                             {tag}
                         </span>
                     ))}
-                    {project.tags.length > 3 && (
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', alignSelf: 'center' }}>
-                            +{project.tags.length - 3} more
-                        </span>
-                    )}
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', marginTop: '1rem' }}>
                     <motion.a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
                         whileHover={{ scale: 1.1, color: project.color }}
+                        onClick={(e) => e.stopPropagation()}
                         style={{ color: 'var(--text-dim)' }}
                     >
                         <Github size={24} />
                     </motion.a>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); onClick(); }}
+                        style={{
+                            marginLeft: 'auto',
+                            fontSize: '0.9rem',
+                            fontWeight: '700',
+                            color: 'var(--primary-color)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                        }}
+                    >
+                        VIEW DETAILS <ExternalLink size={16} />
+                    </button>
                 </div>
             </div>
         </motion.div>
@@ -191,43 +206,164 @@ const ProjectCard = ({ project, index, onClick }) => {
 };
 
 const Projects = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedProject, setSelectedProject] = useState(null);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    const nextProject = useCallback(() => {
+        setCurrentIndex((prev) => (prev + 1) % projects.length);
+    }, []);
+
+    const prevProject = useCallback(() => {
+        setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    }, []);
+
+    useEffect(() => {
+        if (!isAutoPlaying) return;
+        const interval = setInterval(nextProject, 3500);
+        return () => clearInterval(interval);
+    }, [isAutoPlaying, nextProject]);
 
     return (
-        <section id="projects" style={{ padding: '8rem 0', position: 'relative' }}>
-            <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-                    <motion.h2
-                        initial={{ opacity: 0, filter: 'blur(10px)', y: 30 }}
-                        whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1 }}
-                        style={{ fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', fontWeight: '900', letterSpacing: '-2px' }}
-                    >
-                        SELECTED <span className="gradient-text">PROJECTS</span>
-                    </motion.h2>
-                    <motion.div
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        style={{ height: '4px', background: 'var(--primary-color)', width: '100px', margin: '1.5rem auto 0', borderRadius: '10px' }}
-                    />
+        <section id="projects" style={{ padding: '10rem 0', position: 'relative', overflow: 'hidden' }}>
+            {/* Active Project Color Background Aura */}
+            <motion.div
+                animate={{
+                    background: `radial-gradient(circle, ${projects[currentIndex].color}10 0%, transparent 70%)`
+                }}
+                transition={{ duration: 1 }}
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '100vw',
+                    height: '100vw',
+                    zIndex: -1,
+                    filter: 'blur(80px)',
+                }}
+            />
+
+            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+                    <div style={{ overflow: 'hidden' }}>
+                        <motion.h2
+                            initial={{ y: "100%" }}
+                            whileInView={{ y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                            style={{ fontSize: 'clamp(2.2rem, 8vw, 3.5rem)', fontWeight: '900' }}
+                        >
+                            PROJECT <span className="gradient-text">WORK</span>
+                        </motion.h2>
+                    </div>
                 </div>
 
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))',
-                    gap: '2.5rem'
-                }}>
-                    {projects.map((project, index) => (
-                        <ProjectCard
-                            key={index}
-                            project={project}
-                            index={index}
-                            onClick={setSelectedProject}
-                        />
-                    ))}
+                {/* 3D Slider Area */}
+                <div style={{ height: '600px', position: 'relative', perspective: '1200px' }}>
+
+                    {/* Floating Navigation Buttons (Left & Right Sides) */}
+                    <motion.button
+                        whileHover={{ scale: 1.1, x: -5, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => { prevProject(); setIsAutoPlaying(false); }}
+                        style={{
+                            position: 'absolute',
+                            left: 'calc(50% - min(48vw, 500px))',
+                            top: '40%',
+                            transform: 'translateY(-50%)',
+                            zIndex: 100,
+                            color: 'var(--text-color)',
+                            background: 'rgba(255,255,255,0.03)',
+                            backdropFilter: 'blur(10px)',
+                            border: '1px solid var(--border-color)',
+                            borderRadius: '50%',
+                            width: '64px',
+                            height: '64px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            pointerEvents: 'auto'
+                        }}
+                    >
+                        <ChevronLeft size={32} />
+                    </motion.button>
+
+                    <motion.button
+                        whileHover={{ scale: 1.1, x: 5, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => { nextProject(); setIsAutoPlaying(false); }}
+                        style={{
+                            position: 'absolute',
+                            right: 'calc(50% - min(48vw, 500px))',
+                            top: '40%',
+                            transform: 'translateY(-50%)',
+                            zIndex: 100,
+                            color: 'var(--text-color)',
+                            background: 'rgba(255,255,255,0.03)',
+                            backdropFilter: 'blur(10px)',
+                            border: '1px solid var(--border-color)',
+                            borderRadius: '50%',
+                            width: '64px',
+                            height: '64px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            pointerEvents: 'auto'
+                        }}
+                    >
+                        <ChevronRight size={32} />
+                    </motion.button>
+
+                    <AnimatePresence mode="popLayout">
+                        {projects.map((project, index) => {
+                            const isActive = index === currentIndex;
+                            const isPrev = index === (currentIndex - 1 + projects.length) % projects.length;
+                            const isNext = index === (currentIndex + 1) % projects.length;
+
+                            if (!isActive && !isPrev && !isNext) return null;
+
+                            return (
+                                <ProjectCard
+                                    key={project.title}
+                                    project={project}
+                                    isActive={isActive}
+                                    isPrev={isPrev}
+                                    isNext={isNext}
+                                    onClick={() => setSelectedProject(project)}
+                                />
+                            );
+                        })}
+                    </AnimatePresence>
+
+                    {/* Centered Pagination Dots */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '-4rem',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        display: 'flex',
+                        gap: '0.8rem',
+                        zIndex: 10
+                    }}>
+                        {projects.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => { setCurrentIndex(i); setIsAutoPlaying(false); }}
+                                style={{
+                                    width: i === currentIndex ? '30px' : '8px',
+                                    height: '8px',
+                                    borderRadius: '10px',
+                                    background: i === currentIndex ? 'var(--primary-color)' : 'var(--border-color)',
+                                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                                    border: 'none',
+                                    cursor: 'pointer'
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
 
@@ -368,17 +504,72 @@ const Projects = () => {
             </AnimatePresence>
 
             <style>{`
-                @media (max-width: 900px) {
-                    .modal-container {
-                        grid-template-columns: 1fr !important;
-                        max-height: 95vh;
+                @media (max-width: 1100px) {
+                    .project-card {
+                        width: 100% !important;
+                        left: 50% !important;
                     }
-                    .modal-container > div:first-child {
-                        height: 300px;
+                    button[style*="left: calc"] { left: 1rem !important; }
+                    button[style*="right: calc"] { right: 1rem !important; }
+                }
+                @media (max-width: 768px) {
+                    #projects {
+                        padding: 6rem 0 !important;
+                    }
+                    #projects .container > div:nth-child(2) {
+                        height: auto !important;
+                        display: flex !important;
+                        overflow-x: auto !important;
+                        padding: 2rem 1.5rem 4rem !important;
+                        gap: 1.5rem !important;
+                        scroll-snap-type: x mandatory !important;
+                        perspective: none !important;
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
+                    }
+                    #projects .container > div:nth-child(2)::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .project-card {
+                        flex-shrink: 0 !important;
+                        width: 85vw !important;
+                        height: 550px !important;
+                        position: relative !important;
+                        left: 0 !important;
+                        transform: none !important;
+                        scroll-snap-align: center !important;
+                        flex-direction: column !important;
+                        opacity: 1 !important;
+                        filter: none !important;
+                        border-radius: 2.5rem !important;
+                        pointer-events: auto !important;
+                        margin: 0 !important;
+                        box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+                    }
+                    .card-image-wrapper {
+                        width: 100% !important;
+                        height: 40% !important;
+                    }
+                    .card-content-wrapper {
+                        width: 100% !important;
+                        height: 60% !important;
+                        padding: 2rem !important;
+                    }
+                    .card-content-wrapper h3 {
+                        font-size: 1.8rem !important;
+                        margin-bottom: 1rem !important;
+                    }
+                    .card-content-wrapper p {
+                        font-size: 0.95rem !important;
+                        -webkit-line-clamp: 4 !important;
+                    }
+                    button[style*="left: calc"], button[style*="right: calc"] {
+                        display: none !important;
+                    }
+                    div[style*="bottom: -4rem"] {
+                        bottom: 0.5rem !important;
                     }
                 }
-                .project-card:hover .project-img { transform: scale(1.1); }
-                .project-card:hover .img-overlay { opacity: 1 !important; }
             `}</style>
         </section>
     );

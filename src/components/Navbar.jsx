@@ -1,62 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useSpring, useTransform, animate } from 'framer-motion';
-import { Sun, Moon, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sun, Moon } from 'lucide-react';
 
 const Navbar = ({ theme, toggleTheme }) => {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
-    const [visitorCount, setVisitorCount] = useState(23);
-
-    // Global Realtime Visitor Counter Implementation
-    useEffect(() => {
-        const NAMESPACE = "rohit_stats";
-        const KEY = "visits";
-        const OFFSET = 73;
-
-        const trackVisit = async () => {
-            try {
-                const now = Date.now();
-                const sixHours = 6 * 60 * 60 * 1000;
-                const lastVisit = localStorage.getItem('v_last_time');
-
-                let method = 'get';
-                if (!lastVisit || (now - parseInt(lastVisit)) > sixHours) {
-                    method = 'up';
-                    localStorage.setItem('v_last_time', now.toString());
-                }
-
-                const response = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/${KEY}/${method}`);
-                const data = await response.json();
-
-                // Growth bonus: +1 for every 6h since launch
-                const refDate = new Date('2024-01-01').getTime();
-                const growthBonus = Math.floor((now - refDate) / sixHours);
-
-                if (data.count !== undefined) {
-                    setVisitorCount(data.count + OFFSET + growthBonus);
-                }
-            } catch (err) {
-                console.error("Counter API error:", err);
-                setVisitorCount(OFFSET);
-            }
-        };
-
-        trackVisit();
-
-        const interval = setInterval(async () => {
-            try {
-                const response = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/${KEY}`);
-                const data = await response.json();
-                const now = Date.now();
-                const growthBonus = Math.floor((now - new Date('2026-01-01').getTime()) / (6 * 60 * 60 * 1000));
-                if (data.count !== undefined) setVisitorCount(data.count + OFFSET + growthBonus);
-            } catch (err) {
-                console.error("Polling error:", err);
-            }
-        }, 10000);
-
-        return () => clearInterval(interval);
-    }, []);
 
     const navLinks = [
         { name: 'Home', id: 'home' },
@@ -100,23 +48,6 @@ const Navbar = ({ theme, toggleTheme }) => {
 
     const handleClick = (id) => {
         setActiveSection(id);
-    };
-
-    // Sub-component for rolling number animation
-    const AnimatedNumber = ({ value }) => {
-        const [displayVal, setDisplayVal] = useState(value);
-
-        useEffect(() => {
-            const controls = animate(displayVal, value, {
-                type: "spring",
-                stiffness: 50,
-                damping: 15,
-                onUpdate: (latest) => setDisplayVal(Math.round(latest))
-            });
-            return () => controls.stop();
-        }, [value]);
-
-        return <span>{displayVal.toLocaleString()}</span>;
     };
 
     return (
@@ -238,54 +169,6 @@ const Navbar = ({ theme, toggleTheme }) => {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 60 }}>
-                {/* Visitor Counter Pill */}
-                <motion.div
-                    className="visitor-counter"
-                    style={{
-                        padding: '0.45rem 1rem',
-                        borderRadius: '100px',
-                        background: 'rgba(59, 130, 246, 0.15)',
-                        border: '1px solid var(--primary-color)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.6rem',
-                        backdropFilter: 'blur(10px)',
-                        boxShadow: '0 4px 15px rgba(59, 130, 246, 0.2)',
-                        zIndex: 10,
-                        minWidth: '80px'
-                    }}
-                >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Users size={14} style={{ color: 'var(--primary-color)' }} />
-                        <span style={{
-                            fontSize: '0.8rem',
-                            fontWeight: '700',
-                            color: 'var(--text-color)',
-                            letterSpacing: '0.5px'
-                        }}>
-                            <AnimatedNumber value={visitorCount} />
-                        </span>
-                        <motion.div
-                            animate={{
-                                opacity: [0.4, 1, 0.4],
-                                scale: [0.9, 1.1, 0.9]
-                            }}
-                            transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                            style={{
-                                width: '6px',
-                                height: '6px',
-                                borderRadius: '50%',
-                                background: '#ef4444',
-                                boxShadow: '0 0 8px #ef4444'
-                            }}
-                        />
-                    </div>
-                </motion.div>
-
                 <motion.button
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

@@ -154,7 +154,7 @@ const About = () => {
                                 boxShadow: 'inset 0 0 20px rgba(0,0,0,0.4)'
                             }}>
                                 <img
-                                    src="my.jpg"
+                                    src="my.jpeg"
                                     alt="Rohit Mantur"
                                     style={{
                                         width: '100%',
