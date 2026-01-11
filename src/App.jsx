@@ -9,6 +9,7 @@ import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import GalaxyBackground from './components/MovingBackground';
+import MobileWarning from './components/MobileWarning';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+      <MobileWarning />
       <GalaxyBackground theme={theme} />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>

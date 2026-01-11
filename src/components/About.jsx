@@ -23,81 +23,66 @@ const About = () => {
                         }
                     `}</style>
 
-                    {/* Image Column - Nature-Inspired Design */}
+                    {/* Image Column - Future-Tech Orb Design */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
+                        initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                         style={{ display: 'flex', justifyContent: 'center', position: 'relative', alignItems: 'center' }}
                         className="about-image-column"
                     >
-                        {/* Nature Aura */}
+                        {/* Core Aura - Dynamic Glow */}
                         <motion.div
                             animate={{
-                                scale: [1, 1.1, 1],
-                                opacity: [0.1, 0.25, 0.1]
+                                scale: [1, 1.15, 1],
+                                opacity: [0.2, 0.4, 0.2]
                             }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                             style={{
                                 position: 'absolute',
-                                width: '450px',
-                                height: '450px',
-                                background: 'radial-gradient(circle, #10b981 0%, transparent 70%)',
-                                filter: 'blur(60px)',
+                                width: '460px',
+                                height: '460px',
+                                background: 'radial-gradient(circle, var(--primary-color) 0%, transparent 70%)',
+                                filter: 'blur(50px)',
                                 zIndex: 0
                             }}
                         />
 
-                        {/* Sunlight Glow */}
-                        <motion.div
-                            animate={{
-                                scale: [1.1, 1, 1.1],
-                                opacity: [0.05, 0.15, 0.05]
-                            }}
-                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            style={{
-                                position: 'absolute',
-                                width: '500px',
-                                height: '500px',
-                                background: 'radial-gradient(circle, #f59e0b 0%, transparent 70%)',
-                                filter: 'blur(80px)',
-                                zIndex: 0
-                            }}
-                        />
-
-                        {/* Spinning Nature Ring 1 */}
+                        {/* Outer Tech Ring - Rotating Dash */}
                         <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                             style={{
                                 position: 'absolute',
-                                width: '380px',
-                                height: '380px',
-                                border: '2px dashed rgba(16, 185, 129, 0.2)',
+                                width: '400px',
+                                height: '400px',
+                                border: '1px dashed var(--accent-color)',
                                 borderRadius: '50%',
+                                opacity: 0.3,
                                 zIndex: 1
                             }}
                         />
 
-                        {/* Spinning Nature Ring 2 */}
+                        {/* Inner Tech Ring - Counter Rotating */}
                         <motion.div
                             animate={{ rotate: -360 }}
-                            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                             style={{
                                 position: 'absolute',
-                                width: '340px',
-                                height: '340px',
-                                border: '1px solid rgba(132, 204, 22, 0.3)',
+                                width: '360px',
+                                height: '360px',
+                                border: '2px solid rgba(255, 255, 255, 0.05)',
+                                borderTopColor: 'var(--primary-color)',
                                 borderRadius: '50%',
-                                boxShadow: '0 0 20px rgba(132, 204, 22, 0.1)',
                                 zIndex: 1
                             }}
                         />
 
-                        {/* Image Container with Animated Neon Border */}
+                        {/* Main Orb Container */}
                         <motion.div
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05, rotate: 2 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
                             style={{
                                 width: '320px',
                                 height: '320px',
@@ -107,21 +92,22 @@ const About = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                background: 'rgba(255, 255, 255, 0.03)',
-                                backdropFilter: 'blur(10px)',
-                                boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+                                background: 'rgba(255, 255, 255, 0.02)',
+                                backdropFilter: 'blur(12px)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05)'
                             }}
                         >
-                            {/* Inner Rotating Ring */}
+                            {/* Animated Energy Border */}
                             <motion.div
                                 animate={{ rotate: 360 }}
-                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                                 style={{
                                     position: 'absolute',
                                     width: '100%',
                                     height: '100%',
                                     borderRadius: '50%',
-                                    padding: '3px',
+                                    padding: '2px',
                                     background: 'conic-gradient(from 0deg, transparent, var(--primary-color), transparent, var(--accent-color), transparent)',
                                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                                     WebkitMaskComposite: 'destination-out',
@@ -129,29 +115,14 @@ const About = () => {
                                 }}
                             />
 
-                            {/* Outer Pulsing Glow */}
-                            <motion.div
-                                animate={{ scale: [1, 1.02, 1], opacity: [0.3, 0.6, 0.3] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                style={{
-                                    position: 'absolute',
-                                    width: '105%',
-                                    height: '105%',
-                                    borderRadius: '50%',
-                                    border: '2px solid var(--primary-color)',
-                                    filter: 'blur(8px)',
-                                    opacity: 0.5
-                                }}
-                            />
-
+                            {/* Image Wrapper */}
                             <div style={{
-                                width: '280px',
-                                height: '280px',
+                                width: '286px',
+                                height: '286px',
                                 borderRadius: '50%',
                                 overflow: 'hidden',
                                 position: 'relative',
-                                border: '4px solid rgba(255, 255, 255, 0.1)',
-                                boxShadow: 'inset 0 0 20px rgba(0,0,0,0.4)'
+                                border: '2px solid rgba(255, 255, 255, 0.1)',
                             }}>
                                 <img
                                     src="my.jpeg"
@@ -160,50 +131,79 @@ const About = () => {
                                         width: '100%',
                                         height: '100%',
                                         objectFit: 'cover',
-                                        filter: 'contrast(1.1) brightness(1.05)'
+                                        filter: 'contrast(1.05) brightness(1.1)'
                                     }}
                                 />
-                                {/* Glass Shimmer Overlay */}
+                                {/* Scanning Shimmer */}
                                 <motion.div
-                                    animate={{ left: ['-100%', '200%'] }}
-                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                    animate={{
+                                        top: ['-100%', '200%'],
+                                        opacity: [0, 1, 0]
+                                    }}
+                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                     style={{
                                         position: 'absolute',
-                                        top: 0,
-                                        width: '50%',
-                                        height: '100%',
-                                        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
-                                        transform: 'skewX(-20deg)'
+                                        left: 0,
+                                        width: '100%',
+                                        height: '10px',
+                                        background: 'linear-gradient(to bottom, transparent, var(--primary-color), transparent)',
+                                        opacity: 0.2,
+                                        zIndex: 3
                                     }}
                                 />
                             </div>
+
+                            {/* Tech Nodes (Floating) */}
+                            {[0, 1, 2].map((i) => (
+                                <motion.div
+                                    key={i}
+                                    animate={{
+                                        y: [0, -10, 0],
+                                        opacity: [0.5, 1, 0.5]
+                                    }}
+                                    transition={{
+                                        duration: 3,
+                                        repeat: Infinity,
+                                        delay: i * 0.8,
+                                        ease: "easeInOut"
+                                    }}
+                                    style={{
+                                        position: 'absolute',
+                                        width: '12px',
+                                        height: '12px',
+                                        background: i === 0 ? 'var(--primary-color)' : 'var(--accent-color)',
+                                        borderRadius: '50%',
+                                        boxShadow: `0 0 15px ${i === 0 ? 'var(--primary-color)' : 'var(--accent-color)'}`,
+                                        top: i === 0 ? '10%' : i === 1 ? '70%' : '40%',
+                                        left: i === 0 ? '85%' : i === 1 ? '5%' : '95%',
+                                        zIndex: 4
+                                    }}
+                                />
+                            ))}
                         </motion.div>
 
-                        {/* Orbiting Nature Dots */}
-                        {[0, 120, 240].map((angle, i) => (
-                            <motion.div
-                                key={i}
-                                animate={{ rotate: [angle, angle + 360] }}
-                                transition={{ duration: 12 + i * 2, repeat: Infinity, ease: "linear" }}
-                                style={{
-                                    position: 'absolute',
-                                    width: '400px',
-                                    height: '400px',
-                                    zIndex: 3
-                                }}
-                            >
-                                <div style={{
-                                    position: 'absolute',
-                                    top: '0',
-                                    left: '50%',
-                                    width: '8px',
-                                    height: '8px',
-                                    background: i % 2 === 0 ? '#10b981' : '#f59e0b',
-                                    borderRadius: '50%',
-                                    boxShadow: `0 0 12px ${i % 2 === 0 ? '#10b981' : '#f59e0b'}`
-                                }} />
-                            </motion.div>
-                        ))}
+                        {/* Orbiting Satellite Dots */}
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                            style={{
+                                position: 'absolute',
+                                width: '440px',
+                                height: '440px',
+                                zIndex: 3
+                            }}
+                        >
+                            <div style={{
+                                position: 'absolute',
+                                top: '0',
+                                left: '50%',
+                                width: '8px',
+                                height: '8px',
+                                background: 'var(--primary-color)',
+                                borderRadius: '50%',
+                                boxShadow: '0 0 10px var(--primary-color)'
+                            }} />
+                        </motion.div>
                     </motion.div>
 
                     {/* Text Content Column */}
