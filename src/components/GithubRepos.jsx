@@ -107,6 +107,12 @@ const GithubRepos = () => {
             )}
 
             <style>{`
+                @media (max-width: 768px) {
+                    #github {
+                        display: none !important;
+                    }
+                }
+
                 #github::before {
                     content: '';
                     position: absolute;

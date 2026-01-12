@@ -89,6 +89,7 @@ const Skills = () => {
                         maxWidth: '1200px',
                         margin: '0 auto'
                     }}
+                    className="skills-grid"
                 >
                     {allSkills.map((skill, index) => (
                         <motion.div
@@ -113,15 +114,16 @@ const Skills = () => {
                                 cursor: 'default',
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                             }}
+                            className="skill-item"
                         >
-                            <span style={{ color: skill.color, display: 'flex', alignItems: 'center' }}>
+                            <span style={{ color: skill.color, display: 'flex', alignItems: 'center' }} className="skill-icon">
                                 {skill.icon}
                             </span>
                             <span style={{
                                 fontSize: '1.1rem',
                                 fontWeight: '600',
                                 letterSpacing: '0.5px'
-                            }}>
+                            }} className="skill-name">
                                 {skill.name}
                             </span>
                         </motion.div>
@@ -129,6 +131,39 @@ const Skills = () => {
                 </motion.div>
             </div>
 
+            <style>{`
+                @media (max-width: 768px) {
+                    #skills {
+                        padding: 6rem 0 !important;
+                    }
+                    .skills-grid {
+                        display: grid !important;
+                        grid-template-columns: repeat(2, 1fr) !important;
+                        gap: 0.8rem !important;
+                        padding: 0 1rem !important;
+                    }
+                    .skill-item {
+                        padding: 0.8rem 1rem !important;
+                        border-radius: 1rem !important;
+                        gap: 0.6rem !important;
+                        justify-content: flex-start !important;
+                        background: rgba(255, 255, 255, 0.03) !important;
+                    }
+                    .skill-name {
+                        font-size: 0.85rem !important;
+                    }
+                    .skill-icon svg {
+                        width: 16px !important;
+                        height: 16px !important;
+                    }
+                }
+
+                @media (max-width: 380px) {
+                    .skills-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };

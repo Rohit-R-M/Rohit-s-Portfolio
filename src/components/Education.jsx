@@ -50,7 +50,7 @@ const Education = () => {
                     </p>
                 </motion.div>
 
-                <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }}>
+                <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }} className="education-content-wrapper">
                     {/* Vertical Line */}
                     <div style={{
                         position: 'absolute',
@@ -60,9 +60,9 @@ const Education = () => {
                         width: '2px',
                         background: 'linear-gradient(180deg, var(--primary-color), var(--secondary-color), transparent)',
                         opacity: 0.3
-                    }} />
+                    }} className="timeline-line" />
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }} className="education-list">
                         {educationData.map((item, index) => (
                             <motion.div
                                 key={index}
@@ -71,6 +71,7 @@ const Education = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2 }}
                                 style={{ position: 'relative', paddingLeft: '3.5rem' }}
+                                className="education-item"
                             >
                                 {/* Glowing Dot */}
                                 <motion.div
@@ -86,6 +87,7 @@ const Education = () => {
                                         boxShadow: `0 0 20px ${item.color}`,
                                         zIndex: 2
                                     }}
+                                    className="timeline-dot"
                                 />
 
                                 <div style={{
@@ -97,7 +99,7 @@ const Education = () => {
                                     transition: 'transform 0.3s ease',
                                     position: 'relative',
                                     overflow: 'hidden'
-                                }}>
+                                }} className="education-card">
                                     {/* Sidebar Accent */}
                                     <div style={{
                                         position: 'absolute',
@@ -107,29 +109,29 @@ const Education = () => {
                                         width: '4px',
                                         background: item.color,
                                         opacity: 0.6
-                                    }} />
+                                    }} className="card-accent" />
 
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }} className="card-top">
                                         <div>
                                             <h3 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '0.5rem', color: 'var(--text-color)' }}>
                                                 {item.degree}
                                             </h3>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: item.color, fontWeight: '600' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: item.color, fontWeight: '600' }} className="institution-info">
                                                 <GraduationCap size={18} />
                                                 <span>{item.institution}</span>
                                             </div>
                                         </div>
-                                        <div style={{ background: 'rgba(128,128,128,0.1)', padding: '0.5rem 1rem', borderRadius: '100px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-dim)', fontSize: '0.9rem' }}>
+                                        <div style={{ background: 'rgba(128,128,128,0.1)', padding: '0.5rem 1rem', borderRadius: '100px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-dim)', fontSize: '0.9rem' }} className="duration-badge">
                                             <Calendar size={14} />
                                             <span>{item.duration}</span>
                                         </div>
                                     </div>
 
-                                    <p style={{ color: 'var(--text-dim)', lineHeight: '1.7', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
+                                    <p style={{ color: 'var(--text-dim)', lineHeight: '1.7', marginBottom: '1.5rem', fontSize: '1.05rem' }} className="education-desc">
                                         {item.description}
                                     </p>
 
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', color: 'var(--text-dim)', fontSize: '0.9rem', opacity: 0.8, flexWrap: 'wrap' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', color: 'var(--text-dim)', fontSize: '0.9rem', opacity: 0.8, flexWrap: 'wrap' }} className="education-footer">
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                             <MapPin size={14} />
                                             <span>{item.location}</span>
@@ -145,6 +147,67 @@ const Education = () => {
                     </div>
                 </div>
             </div>
+            <style>{`
+                @media (max-width: 768px) {
+                    #education {
+                        padding: 4rem 0 !important;
+                    }
+                    #education h2 {
+                        font-size: 2.2rem !important;
+                        margin-bottom: 0.5rem !important;
+                    }
+                    #education p {
+                        font-size: 1rem !important;
+                    }
+                    /* Remove vertical timeline line on mobile */
+                    .timeline-line {
+                        display: none !important;
+                    }
+                    /* Adjust vertical gap and padding */
+                    .education-list {
+                        gap: 1.5rem !important;
+                    }
+                    .education-item {
+                        padding-left: 0 !important;
+                    }
+                    /* Hide timeline dot on mobile */
+                    .timeline-dot {
+                        display: none !important;
+                    }
+                    /* Adjust card styling for phone */
+                    .education-card {
+                        padding: 1.5rem !important;
+                        border-radius: 1.5rem !important;
+                    }
+                    /* Remove sidebar accent on mobile to save space */
+                    .card-accent {
+                        display: none !important;
+                    }
+                    /* Compact texts */
+                    h3 {
+                        font-size: 1.3rem !important;
+                        line-height: 1.3 !important;
+                    }
+                    .institution-info {
+                        font-size: 0.85rem !important;
+                    }
+                    /* Badge/Duration styling */
+                    .duration-badge {
+                        padding: 0.3rem 0.8rem !important;
+                        font-size: 0.75rem !important;
+                        margin-bottom: 0.2rem !important;
+                    }
+                    /* Description and footer spacing */
+                    .education-desc {
+                        display: none !important;
+                    }
+                    .education-footer {
+                        gap: 0.8rem !important;
+                        flex-direction: column !important;
+                        align-items: flex-start !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };

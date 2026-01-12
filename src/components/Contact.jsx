@@ -79,28 +79,6 @@ const Contact = () => {
                                 I'm always looking for ambitious projects and clever people to collaborate with. Let's make it happen.
                             </p>
 
-                            <motion.a
-                                href="mailto:rohitmantur21@gmail.com"
-                                whileHover={{ scale: 1.05, backgroundColor: 'var(--text-color)', color: 'var(--bg-color)' }}
-                                whileTap={{ scale: 0.95 }}
-                                className="cta-button"
-                                style={{
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '1rem',
-                                    padding: '1.2rem 2.5rem',
-                                    border: '1px solid var(--border-color)',
-                                    borderRadius: '100px',
-                                    fontWeight: '700',
-                                    width: 'fit-content',
-                                    transition: 'all 0.3s ease',
-                                    textDecoration: 'none',
-                                    color: 'inherit'
-                                }}
-                            >
-                                <Mail size={20} />
-                                Start a Conversation
-                            </motion.a>
                         </motion.div>
 
                         {/* LINKEDIN CARD */}
@@ -264,43 +242,71 @@ const Contact = () => {
                     }
 
                     @media (max-width: 768px) {
+                        #contact {
+                            padding: 4rem 0 !important;
+                        }
                         .cosmic-glow {
                             width: 300px !important;
                             height: 300px !important;
                         }
                         .contact-grid {
-                            grid-template-columns: 1fr !important;
+                            grid-template-columns: repeat(4, 1fr) !important;
                             gap: 1rem !important;
                         }
                         .contact-card {
-                            grid-column: span 1 !important;
-                            padding: 2rem !important;
+                            grid-column: span 4 !important;
+                            padding: 2.5rem 1.5rem !important;
                             border-radius: 2rem !important;
                         }
-                        .hero-cta {
+                        /* Specific style for social logo-only cards */
+                        .linkedin-card, .instagram-card, .email-card, .phone-card {
                             grid-column: span 1 !important;
-                            padding: 2.5rem 2rem !important;
+                            padding: 0 !important;
+                            height: 70px !important;
+                            display: flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
+                            border-radius: 1.5rem !important;
                         }
-                        .cta-title {
-                            font-size: 2.2rem !important;
-                        }
-                        .cta-description {
-                            font-size: 1.1rem !important;
+                        /* Hero stays full width, Location is removed */
+                        .hero-cta {
+                            grid-column: span 4 !important;
+                            padding: 3rem 1.8rem !important;
+                            text-align: center !important;
+                            align-items: center !important;
                         }
                         .location-card {
-                            grid-column: span 1 !important;
+                            display: none !important;
                         }
-                        .linkedin-card {
-                            order: 1;
+                        .cta-title {
+                            font-size: 2rem !important;
+                            br { display: none; }
                         }
-                        .instagram-card {
-                            order: 2;
+                        .cta-description {
+                            font-size: 1rem !important;
+                            margin: 0 auto 2.5rem !important;
                         }
-                        .email-card {
-                            order: 3;
+                        .cta-button {
+                            width: 100% !important;
+                            justify-content: center !important;
                         }
-                        .phone-card {
-                            order: 4;
+                        /* Hide text in social cards */
+                        .linkedin-card div:last-child,
+                        .instagram-card span,
+                        .email-card span,
+                        .phone-card p {
+                            display: none !important;
+                        }
+                        .linkedin-card div:first-child,
+                        .instagram-card div,
+                        .email-card div,
+                        .phone-card div {
+                            background: transparent !important;
+                            padding: 0 !important;
+                            margin: 0 !important;
+                        }
+                        .phone-card svg {
+                            margin-bottom: 0 !important;
                         }
                     }
                 `}} />

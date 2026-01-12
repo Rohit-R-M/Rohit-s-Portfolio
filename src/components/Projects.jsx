@@ -206,9 +206,17 @@ const ProjectCard = ({ project, isActive, isPrev, isNext, onClick }) => {
 };
 
 const Projects = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedProject, setSelectedProject] = useState(null);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const nextProject = useCallback(() => {
         setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -259,112 +267,165 @@ const Projects = () => {
                     </div>
                 </div>
 
-                {/* 3D Slider Area */}
-                <div style={{ height: '600px', position: 'relative', perspective: '1200px' }}>
-
-                    {/* Floating Navigation Buttons (Left & Right Sides) */}
-                    <motion.button
-                        whileHover={{ scale: 1.1, x: -5, backgroundColor: 'rgba(255,255,255,0.08)' }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => { prevProject(); setIsAutoPlaying(false); }}
-                        style={{
-                            position: 'absolute',
-                            left: 'calc(50% - min(48vw, 500px))',
-                            top: '40%',
-                            transform: 'translateY(-50%)',
-                            zIndex: 100,
-                            color: 'var(--text-color)',
-                            background: 'rgba(255,255,255,0.03)',
-                            backdropFilter: 'blur(10px)',
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '50%',
-                            width: '64px',
-                            height: '64px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer',
-                            pointerEvents: 'auto'
-                        }}
-                    >
-                        <ChevronLeft size={32} />
-                    </motion.button>
-
-                    <motion.button
-                        whileHover={{ scale: 1.1, x: 5, backgroundColor: 'rgba(255,255,255,0.08)' }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => { nextProject(); setIsAutoPlaying(false); }}
-                        style={{
-                            position: 'absolute',
-                            right: 'calc(50% - min(48vw, 500px))',
-                            top: '40%',
-                            transform: 'translateY(-50%)',
-                            zIndex: 100,
-                            color: 'var(--text-color)',
-                            background: 'rgba(255,255,255,0.03)',
-                            backdropFilter: 'blur(10px)',
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '50%',
-                            width: '64px',
-                            height: '64px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer',
-                            pointerEvents: 'auto'
-                        }}
-                    >
-                        <ChevronRight size={32} />
-                    </motion.button>
-
-                    <AnimatePresence mode="popLayout">
-                        {projects.map((project, index) => {
-                            const isActive = index === currentIndex;
-                            const isPrev = index === (currentIndex - 1 + projects.length) % projects.length;
-                            const isNext = index === (currentIndex + 1) % projects.length;
-
-                            if (!isActive && !isPrev && !isNext) return null;
-
-                            return (
-                                <ProjectCard
-                                    key={project.title}
-                                    project={project}
-                                    isActive={isActive}
-                                    isPrev={isPrev}
-                                    isNext={isNext}
-                                    onClick={() => setSelectedProject(project)}
-                                />
-                            );
-                        })}
-                    </AnimatePresence>
-
-                    {/* Centered Pagination Dots */}
+                {/* Project Showcase Area */}
+                {isMobile ? (
+                    /* High-Performance Static Vertical List for Mobile */
                     <div style={{
-                        position: 'absolute',
-                        bottom: '-4rem',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
                         display: 'flex',
-                        gap: '0.8rem',
-                        zIndex: 10
+                        flexDirection: 'column',
+                        gap: '2.5rem',
+                        padding: '1rem'
                     }}>
-                        {projects.map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => { setCurrentIndex(i); setIsAutoPlaying(false); }}
+                        {projects.map((project, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                onClick={() => setSelectedProject(project)}
                                 style={{
-                                    width: i === currentIndex ? '30px' : '8px',
-                                    height: '8px',
-                                    borderRadius: '10px',
-                                    background: i === currentIndex ? 'var(--primary-color)' : 'var(--border-color)',
-                                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                                    border: 'none',
-                                    cursor: 'pointer'
+                                    background: 'var(--surface-color)',
+                                    backdropFilter: 'blur(20px)',
+                                    border: '1px solid var(--border-color)',
+                                    borderRadius: '2rem',
+                                    padding: '2rem',
+                                    position: 'relative',
+                                    overflow: 'hidden',
+                                    boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
                                 }}
-                            />
+                            >
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.2rem' }}>
+                                    <h3 style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-color)' }}>{project.title}</h3>
+                                    <div style={{ color: project.color }}>
+                                        <ExternalLink size={20} />
+                                    </div>
+                                </div>
+                                <p style={{ color: 'var(--text-dim)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>{project.description}</p>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+                                    {project.tags.map(tag => (
+                                        <span key={tag} style={{
+                                            padding: '0.4rem 0.9rem',
+                                            background: `${project.color}15`,
+                                            color: project.color,
+                                            borderRadius: '100px',
+                                            fontSize: '0.75rem',
+                                            fontWeight: '600'
+                                        }}>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                ) : (
+                    /* Premium 3D Slider for Desktop */
+                    <div style={{ height: '600px', position: 'relative', perspective: '1200px' }}>
+                        {/* Floating Navigation Buttons */}
+                        <motion.button
+                            whileHover={{ scale: 1.1, x: -5, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => { prevProject(); setIsAutoPlaying(false); }}
+                            style={{
+                                position: 'absolute',
+                                left: 'calc(50% - min(48vw, 500px))',
+                                top: '40%',
+                                transform: 'translateY(-50%)',
+                                zIndex: 100,
+                                color: 'var(--text-color)',
+                                background: 'rgba(255,255,255,0.03)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '50%',
+                                width: '64px',
+                                height: '64px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                pointerEvents: 'auto'
+                            }}
+                        >
+                            <ChevronLeft size={32} />
+                        </motion.button>
+
+                        <motion.button
+                            whileHover={{ scale: 1.1, x: 5, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => { nextProject(); setIsAutoPlaying(false); }}
+                            style={{
+                                position: 'absolute',
+                                right: 'calc(50% - min(48vw, 500px))',
+                                top: '40%',
+                                transform: 'translateY(-50%)',
+                                zIndex: 100,
+                                color: 'var(--text-color)',
+                                background: 'rgba(255,255,255,0.03)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '50%',
+                                width: '64px',
+                                height: '64px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                pointerEvents: 'auto'
+                            }}
+                        >
+                            <ChevronRight size={32} />
+                        </motion.button>
+
+                        <AnimatePresence mode="popLayout">
+                            {projects.map((project, index) => {
+                                const isActive = index === currentIndex;
+                                const isPrev = index === (currentIndex - 1 + projects.length) % projects.length;
+                                const isNext = index === (currentIndex + 1) % projects.length;
+
+                                if (!isActive && !isPrev && !isNext) return null;
+
+                                return (
+                                    <ProjectCard
+                                        key={project.title}
+                                        project={project}
+                                        isActive={isActive}
+                                        isPrev={isPrev}
+                                        isNext={isNext}
+                                        onClick={() => setSelectedProject(project)}
+                                    />
+                                );
+                            })}
+                        </AnimatePresence>
+
+                        {/* Centered Pagination Dots */}
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '-4rem',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            display: 'flex',
+                            gap: '0.8rem',
+                            zIndex: 10
+                        }}>
+                            {projects.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => { setCurrentIndex(index); setIsAutoPlaying(false); }}
+                                    style={{
+                                        width: index === currentIndex ? '30px' : '10px',
+                                        height: '10px',
+                                        borderRadius: '10px',
+                                        background: index === currentIndex ? projects[index].color : 'var(--border-color)',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)'
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Modal */}
@@ -512,66 +573,8 @@ const Projects = () => {
                     button[style*="left: calc"] { left: 1rem !important; }
                     button[style*="right: calc"] { right: 1rem !important; }
                 }
-                @media (max-width: 768px) {
-                    #projects {
-                        padding: 6rem 0 !important;
-                    }
-                    #projects .container > div:nth-child(2) {
-                        height: auto !important;
-                        display: flex !important;
-                        overflow-x: auto !important;
-                        padding: 2rem 1.5rem 4rem !important;
-                        gap: 1.5rem !important;
-                        scroll-snap-type: x mandatory !important;
-                        perspective: none !important;
-                        -ms-overflow-style: none;
-                        scrollbar-width: none;
-                    }
-                    #projects .container > div:nth-child(2)::-webkit-scrollbar {
-                        display: none;
-                    }
-                    .project-card {
-                        flex-shrink: 0 !important;
-                        width: 85vw !important;
-                        height: 550px !important;
-                        position: relative !important;
-                        left: 0 !important;
-                        transform: none !important;
-                        scroll-snap-align: center !important;
-                        flex-direction: column !important;
-                        opacity: 1 !important;
-                        filter: none !important;
-                        border-radius: 2.5rem !important;
-                        pointer-events: auto !important;
-                        margin: 0 !important;
-                        box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
-                    }
-                    .card-image-wrapper {
-                        width: 100% !important;
-                        height: 40% !important;
-                    }
-                    .card-content-wrapper {
-                        width: 100% !important;
-                        height: 60% !important;
-                        padding: 2rem !important;
-                    }
-                    .card-content-wrapper h3 {
-                        font-size: 1.8rem !important;
-                        margin-bottom: 1rem !important;
-                    }
-                    .card-content-wrapper p {
-                        font-size: 0.95rem !important;
-                        -webkit-line-clamp: 4 !important;
-                    }
-                    button[style*="left: calc"], button[style*="right: calc"] {
-                        display: none !important;
-                    }
-                    div[style*="bottom: -4rem"] {
-                        bottom: 0.5rem !important;
-                    }
-                }
             `}</style>
-        </section>
+        </section >
     );
 };
 

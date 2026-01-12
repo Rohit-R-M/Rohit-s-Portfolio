@@ -290,8 +290,8 @@ const About = () => {
                     }
                     #about { padding: 5rem 0 !important; }
                     .about-title { font-size: 2.5rem !important; margin-bottom: 1.5rem !important; text-align: center; }
-                    .about-p { font-size: 1rem !important; text-align: center; }
-                    .about-socials { justify-content: center; }
+                    .about-p { font-size: 1rem !important; text-align: justify; }
+                    .about-socials { display: none !important; }
                     .about-floating-logo { padding: 8px !important; borderRadius: 10px !important; }
                 }
 

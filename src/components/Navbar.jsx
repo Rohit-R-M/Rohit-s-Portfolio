@@ -188,6 +188,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                         cursor: 'pointer',
                         boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
                     }}
+                    className="nav-github-link"
                 >
                     <Github size={19} />
                 </motion.a>
@@ -223,6 +224,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 }
                 @media (max-width: 768px) {
                     .nav-links { display: none !important; }
+                    .nav-github-link { display: none !important; }
                 }
             `}</style>
         </motion.nav>
