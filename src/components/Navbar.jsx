@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Github } from 'lucide-react';
 
 const Navbar = ({ theme, toggleTheme }) => {
     const [scrolled, setScrolled] = useState(false);
@@ -82,30 +82,28 @@ const Navbar = ({ theme, toggleTheme }) => {
                 }
             `}</style>
 
-            {/* Logo with Staggered Letters */}
-            <div style={{ fontSize: '1.6rem', fontWeight: '800', zIndex: 60, letterSpacing: '-0.5px' }}>
+            {/* Logo - Name Only */}
+            <div style={{ zIndex: 60 }}>
                 <a
                     href="#home"
                     onClick={() => handleClick('home')}
-                    style={{ color: 'var(--text-color)', textDecoration: 'none', display: 'flex' }}
+                    style={{
+                        color: 'var(--text-color)',
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}
                 >
-                    {"Rohit".split("").map((char, i) => (
-                        <motion.span
-                            key={i}
-                            initial={{ y: -20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.1 + i * 0.05, duration: 0.5 }}
-                        >
-                            {char}
-                        </motion.span>
-                    ))}
                     <motion.span
-                        initial={{ scale: 0, rotate: -45 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ type: "spring", stiffness: 400, delay: 0.5 }}
-                        style={{ color: 'var(--primary-color)' }}
+                        className="nav-logo-text"
+                        style={{
+                            fontSize: '1.5rem',
+                            fontWeight: '800',
+                            letterSpacing: '-0.5px',
+                            fontFamily: "'Outfit', sans-serif"
+                        }}
                     >
-                        .
+                        Rohit<span style={{ color: 'var(--primary-color)' }}>.</span>
                     </motion.span>
                 </a>
             </div>
@@ -169,6 +167,31 @@ const Navbar = ({ theme, toggleTheme }) => {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 60 }}>
+                <motion.a
+                    href="https://github.com/Rohit-R-M"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.9, type: "spring" }}
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    style={{
+                        padding: '0.65rem',
+                        borderRadius: '50%',
+                        background: 'var(--surface-color)',
+                        border: '1px solid var(--border-color)',
+                        color: 'var(--text-color)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                    }}
+                >
+                    <Github size={19} />
+                </motion.a>
+
                 <motion.button
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

@@ -61,7 +61,7 @@ const Hero = () => {
             id="home"
             style={{
                 minHeight: '85vh',
-                padding: '12rem 0 6rem 0',
+                padding: '15rem 0 6rem 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -101,48 +101,56 @@ const Hero = () => {
 
                     <motion.h1
                         style={{
-                            fontSize: 'clamp(3.5rem, 15vw, 10rem)',
-                            fontWeight: '700',
+                            fontSize: 'clamp(2.5rem, 10vw, 8rem)',
+                            fontWeight: '900',
                             lineHeight: 1,
                             marginBottom: '2.5rem',
-                            fontFamily: "'Dancing Script', cursive",
+                            fontFamily: "'Outfit', sans-serif",
                             display: 'flex',
+                            flexDirection: 'row',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            gap: '0.2em',
-                            textTransform: 'none',
-                            filter: 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.4))',
-                            whiteSpace: 'nowrap'
+                            gap: '0.3rem',
+                            filter: 'drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.2))',
+                            whiteSpace: 'nowrap',
+                            letterSpacing: '-0.04em',
+                            textTransform: 'uppercase'
                         }}
                     >
-                        {/* Rohit - Writing Reveal */}
-                        <motion.span
-                            initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0, x: -10 }}
-                            animate={{ clipPath: 'inset(0 0% 0 0)', opacity: 1, x: 0 }}
-                            transition={{
-                                duration: 1.5,
-                                ease: [0.45, 0, 0.55, 1],
-                                delay: 0.5
-                            }}
-                            style={{ display: 'inline-block', padding: '0 15px' }}
-                        >
-                            Rohit
-                        </motion.span>
+                        {"ROHIT".split("").map((char, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ y: 80, opacity: 0, rotateX: -90 }}
+                                animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.5 + i * 0.1,
+                                    ease: [0.215, 0.61, 0.355, 1]
+                                }}
+                                style={{ display: 'inline-block', originY: 'bottom' }}
+                            >
+                                {char}
+                            </motion.span>
+                        ))}
 
-                        {/* Mantur - Writing Reveal */}
-                        <motion.span
-                            initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0, x: 10 }}
-                            animate={{ clipPath: 'inset(0 0% 0 0)', opacity: 1, x: 0 }}
-                            transition={{
-                                duration: 1.5,
-                                ease: [0.45, 0, 0.55, 1],
-                                delay: 1.2
-                            }}
-                            className="gradient-text hero-name"
-                            style={{ display: 'inline-block', padding: '0 15px' }}
-                        >
-                            Mantur
-                        </motion.span>
+                        <span style={{ width: '0.3em' }} />
+
+                        {"MANTUR".split("").map((char, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ y: 80, opacity: 0, rotateX: -90 }}
+                                animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 1.2 + i * 0.1,
+                                    ease: [0.215, 0.61, 0.355, 1]
+                                }}
+                                className="gradient-text"
+                                style={{ display: 'inline-block', originY: 'bottom' }}
+                            >
+                                {char}
+                            </motion.span>
+                        ))}
                     </motion.h1>
 
                     <motion.p
@@ -218,9 +226,11 @@ const Hero = () => {
                         margin-bottom: 0.5rem !important;
                     }
                     h1 { 
-                        font-size: 4rem !important; 
-                        line-height: 0.9 !important; 
-                        margin-bottom: 1.5rem !important;
+                        font-size: clamp(2.5rem, 12vw, 4.5rem) !important; 
+                        line-height: 1 !important; 
+                        margin-bottom: 2rem !important;
+                        flex-direction: row !important;
+                        flex-wrap: wrap !important;
                     }
                     .hero-description { 
                         font-size: 1.1rem !important; 

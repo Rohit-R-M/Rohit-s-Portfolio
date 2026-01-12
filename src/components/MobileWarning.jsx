@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Monitor, X, Smartphone } from 'lucide-react';
+import { Monitor, X, Smartphone, AlertTriangle } from 'lucide-react';
 
 const MobileWarning = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        // Detect if the screen is mobile sized
         const checkMobile = () => {
-            if (window.innerWidth <= 768) {
+            // Strict check for mobile screens (typically < 1024px for complex desktop designs)
+            if (window.innerWidth < 1024) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
             }
         };
 
-        // Initial check
         checkMobile();
-
-        // Add resize listener
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
@@ -30,100 +27,99 @@ const MobileWarning = () => {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
                 style={{
                     position: 'fixed',
                     top: 0,
                     left: 0,
                     width: '100vw',
                     height: '100vh',
-                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    backgroundColor: '#050505',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    zIndex: 9999,
-                    backdropFilter: 'blur(10px)',
+                    zIndex: 10000,
                     padding: '2rem',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    fontFamily: "'Outfit', sans-serif"
                 }}
             >
+                {/* Background Tech Pattern */}
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0)',
+                    backgroundSize: '30px 30px',
+                    opacity: 0.5
+                }} />
+
                 <motion.div
-                    initial={{ scale: 0.9, y: 20 }}
-                    animate={{ scale: 1, y: 0 }}
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
                     style={{
-                        background: 'rgba(255, 255, 255, 0.03)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        padding: '3rem 2rem',
-                        borderRadius: '2rem',
-                        maxWidth: '400px',
+                        background: 'rgba(255, 255, 255, 0.02)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        padding: '4rem 2rem',
+                        borderRadius: '2.5rem',
+                        maxWidth: '450px',
                         width: '100%',
                         position: 'relative',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+                        backdropFilter: 'blur(20px)',
+                        boxShadow: '0 0 40px rgba(0,0,0,0.5)'
                     }}
                 >
-                    <button
-                        onClick={() => setIsVisible(false)}
-                        style={{
-                            position: 'absolute',
-                            top: '1.5rem',
-                            right: '1.5rem',
-                            background: 'none',
-                            border: 'none',
-                            color: 'rgba(255, 255, 255, 0.5)',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <X size={24} />
-                    </button>
-
-                    <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center' }}>
-                        <Smartphone size={40} className="text-red-500" style={{ opacity: 0.5 }} />
-                        <motion.div
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        >
-                            <X size={20} style={{ color: 'var(--primary-color)' }} />
-                        </motion.div>
-                        <Monitor size={48} style={{ color: 'var(--primary-color)' }} />
+                    <div style={{ marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                        <div style={{ position: 'relative' }}>
+                            <Monitor size={64} style={{ color: 'var(--primary-color)' }} />
+                            <motion.div
+                                animate={{ opacity: [1, 0.4, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                style={{
+                                    position: 'absolute',
+                                    top: -10,
+                                    right: -10,
+                                    background: '#ef4444',
+                                    borderRadius: '50%',
+                                    padding: '4px'
+                                }}
+                            >
+                                <AlertTriangle size={18} color="white" />
+                            </motion.div>
+                        </div>
                     </div>
 
                     <h2 style={{
                         color: '#fff',
-                        fontSize: '1.8rem',
-                        marginBottom: '1rem',
-                        fontWeight: '800'
+                        fontSize: '2.2rem',
+                        marginBottom: '1.5rem',
+                        fontWeight: '900',
+                        letterSpacing: '-1px'
                     }}>
-                        Desktop <span className="gradient-text">Optimized</span>
+                        DESKTOP <span className="gradient-text">REQUIRED</span>
                     </h2>
 
                     <p style={{
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: 'rgba(255, 255, 255, 0.6)',
                         fontSize: '1.1rem',
-                        lineHeight: '1.6',
+                        lineHeight: '1.7',
                         marginBottom: '2rem'
                     }}>
-                        For the best visual experience and interactive 3D elements, please open this portfolio in <b>Desktop Mode</b>.
+                        This high-performance portfolio is built for large screens and immersive interactions.
+                        Mobile access is currently restricted.
                     </p>
 
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setIsVisible(false)}
-                        style={{
-                            background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
-                            color: 'white',
-                            border: 'none',
-                            padding: '1rem 2rem',
-                            borderRadius: '1rem',
-                            fontSize: '1rem',
-                            fontWeight: '700',
-                            cursor: 'pointer',
-                            width: '100%',
-                            boxShadow: '0 10px 20px -5px rgba(0, 0, 0, 0.3)'
-                        }}
-                    >
-                        Continue Anyway
-                    </motion.button>
+                    <div style={{
+                        padding: '1.5rem',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        borderRadius: '1.2rem',
+                        border: '1px solid rgba(255, 255, 255, 0.05)'
+                    }}>
+                        <p style={{ color: 'var(--primary-color)', fontWeight: '700', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                            Please switch to Desktop Mode
+                        </p>
+                        <p style={{ color: 'rgba(255, 255, 255, 0.4)', fontSize: '0.85rem', marginTop: '0.5rem' }}>
+                            Or view on a Laptop / Desktop PC
+                        </p>
+                    </div>
                 </motion.div>
             </motion.div>
         </AnimatePresence>

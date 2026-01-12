@@ -10,15 +10,66 @@ const About = () => {
                     <style>{`
                         .about-grid {
                             display: grid;
-                            grid-template-columns: minmax(300px, 1fr) 1.8fr;
-                            gap: 8rem;
-                            alignItems: center;
+                            grid-template-columns: minmax(400px, 1fr) 1.8fr;
+                            gap: 10rem;
+                            align-items: center;
                         }
+
+                        .tech-square-container {
+                            position: relative;
+                            width: 380px;
+                            height: 380px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .square-main {
+                            width: 340px;
+                            height: 340px;
+                            background: var(--surface-color);
+                            position: relative;
+                            z-index: 2;
+                            overflow: hidden;
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            border-radius: 48px;
+                        }
+
+                        .square-border-offset {
+                            position: absolute;
+                            width: 340px;
+                            height: 340px;
+                            border: 2px solid var(--primary-color);
+                            opacity: 0.2;
+                            z-index: 1;
+                            transform: translate(15px, 15px);
+                            border-radius: 48px;
+                        }
+
+                        .corner-bracket {
+                            position: absolute;
+                            width: 30px;
+                            height: 30px;
+                            border: 2px solid var(--primary-color);
+                            z-index: 3;
+                        }
+
+                        .br-tl { top: -10px; left: -10px; border-right: none; border-bottom: none; }
+                        .br-tr { top: -10px; right: -10px; border-left: none; border-bottom: none; }
+                        .br-bl { bottom: -10px; left: -10px; border-right: none; border-top: none; }
+                        .br-br { bottom: -10px; right: -10px; border-left: none; border-top: none; }
+
                         @media (max-width: 1024px) {
                             .about-grid {
                                 grid-template-columns: 1fr;
                                 gap: 4rem;
                                 text-align: center;
+                            }
+                            .tech-square-container { width: 300px; height: 300px; margin: 0 auto; }
+                            .square-main, .square-border-offset { 
+                                width: 260px; 
+                                height: 260px; 
+                                border-radius: 32px;
                             }
                         }
                     `}</style>
@@ -49,81 +100,28 @@ const About = () => {
                             }}
                         />
 
-                        {/* Outer Tech Ring - Rotating Dash */}
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                            style={{
-                                position: 'absolute',
-                                width: '400px',
-                                height: '400px',
-                                border: '1px dashed var(--accent-color)',
-                                borderRadius: '50%',
-                                opacity: 0.3,
-                                zIndex: 1
-                            }}
-                        />
 
-                        {/* Inner Tech Ring - Counter Rotating */}
-                        <motion.div
-                            animate={{ rotate: -360 }}
-                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                            style={{
-                                position: 'absolute',
-                                width: '360px',
-                                height: '360px',
-                                border: '2px solid rgba(255, 255, 255, 0.05)',
-                                borderTopColor: 'var(--primary-color)',
-                                borderRadius: '50%',
-                                zIndex: 1
-                            }}
-                        />
 
-                        {/* Main Orb Container */}
+                        {/* High-Tech Square Profile Design */}
                         <motion.div
-                            whileHover={{ scale: 1.05, rotate: 2 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                            style={{
-                                width: '320px',
-                                height: '320px',
-                                borderRadius: '50%',
-                                position: 'relative',
-                                zIndex: 2,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                background: 'rgba(255, 255, 255, 0.02)',
-                                backdropFilter: 'blur(12px)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05)'
-                            }}
+                            whileHover={{ scale: 1.02 }}
+                            className="tech-square-container"
                         >
-                            {/* Animated Energy Border */}
+                            {/* Decorative Offset Border */}
                             <motion.div
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                                style={{
-                                    position: 'absolute',
-                                    width: '100%',
-                                    height: '100%',
-                                    borderRadius: '50%',
-                                    padding: '2px',
-                                    background: 'conic-gradient(from 0deg, transparent, var(--primary-color), transparent, var(--accent-color), transparent)',
-                                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                                    WebkitMaskComposite: 'destination-out',
-                                    maskComposite: 'exclude',
-                                }}
+                                animate={{ opacity: [0.1, 0.3, 0.1], x: [15, 20, 15], y: [15, 20, 15] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                className="square-border-offset"
                             />
 
-                            {/* Image Wrapper */}
-                            <div style={{
-                                width: '286px',
-                                height: '286px',
-                                borderRadius: '50%',
-                                overflow: 'hidden',
-                                position: 'relative',
-                                border: '2px solid rgba(255, 255, 255, 0.1)',
-                            }}>
+                            {/* Corner Brackets */}
+                            <div className="corner-bracket br-tl" />
+                            <div className="corner-bracket br-tr" />
+                            <div className="corner-bracket br-bl" />
+                            <div className="corner-bracket br-br" />
+
+                            {/* Main Square Content */}
+                            <div className="square-main">
                                 <img
                                     src="my.jpeg"
                                     alt="Rohit Mantur"
@@ -134,76 +132,56 @@ const About = () => {
                                         filter: 'contrast(1.05) brightness(1.1)'
                                     }}
                                 />
-                                {/* Scanning Shimmer */}
+
+                                {/* Vertical Laser Scan */}
                                 <motion.div
-                                    animate={{
-                                        top: ['-100%', '200%'],
-                                        opacity: [0, 1, 0]
-                                    }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                    animate={{ top: ['-100%', '100%'] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                                     style={{
                                         position: 'absolute',
                                         left: 0,
                                         width: '100%',
-                                        height: '10px',
-                                        background: 'linear-gradient(to bottom, transparent, var(--primary-color), transparent)',
-                                        opacity: 0.2,
+                                        height: '2px',
+                                        background: 'var(--primary-color)',
+                                        boxShadow: '0 0 15px var(--primary-color)',
                                         zIndex: 3
                                     }}
                                 />
+
+                                {/* Glass Grid Effect */}
+                                <div style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)',
+                                    backgroundSize: '20px 20px',
+                                    zIndex: 2,
+                                    pointerEvents: 'none'
+                                }} />
                             </div>
 
-                            {/* Tech Nodes (Floating) */}
+                            {/* Floating Tech Fragments */}
                             {[0, 1, 2].map((i) => (
                                 <motion.div
                                     key={i}
                                     animate={{
                                         y: [0, -10, 0],
-                                        opacity: [0.5, 1, 0.5]
+                                        opacity: [0.2, 0.5, 0.2]
                                     }}
-                                    transition={{
-                                        duration: 3,
-                                        repeat: Infinity,
-                                        delay: i * 0.8,
-                                        ease: "easeInOut"
-                                    }}
+                                    transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
                                     style={{
                                         position: 'absolute',
                                         width: '12px',
                                         height: '12px',
-                                        background: i === 0 ? 'var(--primary-color)' : 'var(--accent-color)',
-                                        borderRadius: '50%',
-                                        boxShadow: `0 0 15px ${i === 0 ? 'var(--primary-color)' : 'var(--accent-color)'}`,
-                                        top: i === 0 ? '10%' : i === 1 ? '70%' : '40%',
-                                        left: i === 0 ? '85%' : i === 1 ? '5%' : '95%',
-                                        zIndex: 4
+                                        border: '1px solid var(--primary-color)',
+                                        zIndex: 4,
+                                        top: i === 0 ? '10%' : i === 1 ? '85%' : '45%',
+                                        left: i === 0 ? '95%' : i === 1 ? '5%' : '105%',
                                     }}
                                 />
                             ))}
                         </motion.div>
 
-                        {/* Orbiting Satellite Dots */}
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                            style={{
-                                position: 'absolute',
-                                width: '440px',
-                                height: '440px',
-                                zIndex: 3
-                            }}
-                        >
-                            <div style={{
-                                position: 'absolute',
-                                top: '0',
-                                left: '50%',
-                                width: '8px',
-                                height: '8px',
-                                background: 'var(--primary-color)',
-                                borderRadius: '50%',
-                                boxShadow: '0 0 10px var(--primary-color)'
-                            }} />
-                        </motion.div>
+
                     </motion.div>
 
                     {/* Text Content Column */}
@@ -296,6 +274,9 @@ const About = () => {
                 </div>
             </div>
             <style>{`
+                :root {
+                }
+
                 @media (max-width: 1024px) {
                     #about .container > div {
                         grid-template-columns: 1fr !important;
@@ -305,10 +286,18 @@ const About = () => {
                 }
 
                 @media (max-width: 768px) {
+                    :root {
+                    }
                     #about { padding: 5rem 0 !important; }
                     .about-title { font-size: 2.5rem !important; margin-bottom: 1.5rem !important; text-align: center; }
                     .about-p { font-size: 1rem !important; text-align: center; }
                     .about-socials { justify-content: center; }
+                    .about-floating-logo { padding: 8px !important; borderRadius: 10px !important; }
+                }
+
+                @media (max-width: 480px) {
+                    :root {
+                    }
                 }
             `}</style>
         </section>

@@ -5,6 +5,7 @@ import About from './components/About';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import GithubRepos from './components/GithubRepos';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -70,6 +71,7 @@ function App() {
           <Education />
           <Skills />
           <Projects />
+          <GithubRepos />
         </div>
 
         <Achievements />
