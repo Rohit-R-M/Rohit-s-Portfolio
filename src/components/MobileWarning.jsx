@@ -4,11 +4,13 @@ import { Monitor, X, Smartphone, AlertTriangle } from 'lucide-react';
 
 const MobileWarning = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [isDismissed, setIsDismissed] = useState(sessionStorage.getItem('mobileWarningDismissed') === 'true');
+
 
     useEffect(() => {
         const checkMobile = () => {
-            // Strict check for mobile screens (typically < 1024px for complex desktop designs)
-            if (window.innerWidth < 1024) {
+            // Lower threshold to 768px to allow tablets and mobile devices in 'Desktop Mode'
+            if (window.innerWidth < 768) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
@@ -20,7 +22,12 @@ const MobileWarning = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    if (!isVisible) return null;
+    const handleDismiss = () => {
+        setIsDismissed(true);
+        sessionStorage.setItem('mobileWarningDismissed', 'true');
+    };
+
+    if (!isVisible || isDismissed) return null;
 
     return (
         <AnimatePresence>
@@ -61,12 +68,19 @@ const MobileWarning = () => {
                         padding: '4rem 2rem',
                         borderRadius: '2.5rem',
                         maxWidth: '450px',
-                        width: '100%',
+                        width: '90%', // Slightly more breathing room
+                        maxHeight: '90vh', // Prevent overflow on short screens
+                        overflowY: 'auto', // Allow scrolling if content is too tall
                         position: 'relative',
                         backdropFilter: 'blur(20px)',
-                        boxShadow: '0 0 40px rgba(0,0,0,0.5)'
+                        boxShadow: '0 0 40px rgba(0,0,0,0.5)',
+                        scrollbarWidth: 'none', // Hide scrollbar but keep functionality
+                        msOverflowStyle: 'none'
                     }}
                 >
+                    <style>{`
+                        div::-webkit-scrollbar { display: none; }
+                    `}</style>
                     <div style={{ marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                         <div style={{ position: 'relative' }}>
                             <Monitor size={64} style={{ color: 'var(--primary-color)' }} />
@@ -120,7 +134,28 @@ const MobileWarning = () => {
                             Or view on a Laptop / Desktop PC
                         </p>
                     </div>
+
+                    <motion.button
+                        whileHover={{ scale: 1.05, background: 'rgba(255, 255, 255, 0.1)' }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleDismiss}
+                        style={{
+                            marginTop: '2rem',
+                            padding: '0.8rem 1.5rem',
+                            background: 'transparent',
+                            border: '1px solid rgba(255, 255, 255, 0.2)',
+                            borderRadius: '0.8rem',
+                            color: 'rgba(255, 255, 255, 0.6)',
+                            fontSize: '0.9rem',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease'
+                        }}
+                    >
+                        Continue to Site Anyway
+                    </motion.button>
                 </motion.div>
+
             </motion.div>
         </AnimatePresence>
     );
