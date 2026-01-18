@@ -23,7 +23,7 @@ const Education = () => {
             color: "#8b5cf6"
         },
         {
-            degree: "Secondary School Leaving Certificate (SSLC)",
+            degree: "Secondary School Leaving Certificate (SSLC)-CBSE",
             institution: "M.R.G Internation Public School",
             duration: "2020",
             grade: "Pass",
