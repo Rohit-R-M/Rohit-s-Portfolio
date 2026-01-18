@@ -22,11 +22,9 @@ const Skills = () => {
     const allSkills = [
         { name: "Android Studio", icon: <Layers size={18} />, color: "#3ddc84" },
         { name: "C", icon: <Terminal size={18} />, color: "#64748b" },
-        { name: "Cloud Computing", icon: <Cloud size={18} />, color: "#0ea5e9" },
-        { name: "Computer Architecture", icon: <Cpu size={18} />, color: "#a78bfa" },
         { name: "Computer Networking", icon: <Network size={18} />, color: "#38bdf8" },
         { name: "Dart", icon: <Zap size={18} />, color: "#06b6d4" },
-        { name: "DB Management", icon: <Database size={18} />, color: "#f472b6" },
+        { name: "SQL & NoSQL", icon: <Database size={18} />, color: "#f472b6" },
         { name: "DSA", icon: <Layout size={18} />, color: "#f87171" },
         { name: "Firebase", icon: <Database size={18} />, color: "#f59e0b" },
         { name: "Flutter", icon: <Smartphone size={18} />, color: "#3b82f6" },
@@ -36,7 +34,6 @@ const Skills = () => {
         { name: "Operating Systems", icon: <Cpu size={18} />, color: "#818cf8" },
         { name: "Prompt Engineering", icon: <Sparkles size={18} />, color: "#fbbf24" },
         { name: "Python", icon: <Terminal size={18} />, color: "#3776ab" },
-        { name: "REST APIs", icon: <Globe size={18} />, color: "#10b981" },
         { name: "Web Development", icon: <Globe size={18} />, color: "#fb7185" }
     ];
 
