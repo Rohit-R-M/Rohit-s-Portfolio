@@ -8,7 +8,7 @@ const Education = () => {
             degree: "B.E. in Computer Science & Engineering",
             institution: "Basaveshwar Engineering College, Bagalkot",
             duration: "2022 - 2026",
-            grade: "7.93 CGPA",
+            grade: "8.02 CGPA",
             description: "Focused on core Computer Science principles including Data Structures, Algorithms, Computer Networks, and Operating Systems. Maintaining a strong academic record with special interest in System-level programming.",
             location: "Bagalkot, Karnataka",
             color: "#3b82f6"
