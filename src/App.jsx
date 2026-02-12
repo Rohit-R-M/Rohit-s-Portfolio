@@ -12,6 +12,8 @@ import Footer from './components/Footer';
 import GalaxyBackground from './components/MovingBackground';
 import MobileWarning from './components/MobileWarning';
 
+import Experience from './components/Experience';
+
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
@@ -69,6 +71,7 @@ function App() {
           }} />
 
           <Education />
+          <Experience />
           <Skills />
           <Projects />
           <GithubRepos />

@@ -10,6 +10,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         { name: 'Home', id: 'home' },
         { name: 'About', id: 'about' },
         { name: 'Education', id: 'education' },
+        { name: 'Experience', id: 'experience' },
         { name: 'Skills', id: 'skills' },
         { name: 'Projects', id: 'projects' },
         { name: 'Achievements', id: 'achievements' },
