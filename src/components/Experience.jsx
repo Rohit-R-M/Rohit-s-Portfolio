@@ -7,13 +7,14 @@ const Experience = () => {
         {
             title: "Internship",
             company: "Hindustan Aeronautics Limited (HAL)",
-            duration: "Jan 2026 - Ongoing",
+            duration: "Jan 2026 - Apr 2026",
             location: "HAL ADB",
             description: "Working in HAL ADB department on aircraft design–related activities.",
             responsibilities: [
                 "Assisting in analysis, documentation, and study of aircraft systems and design concepts",
-                "Contributing to research initiatives within the aviation sector",
-                "Learning and applying software concepts in a professional aerospace environment"
+                "Learning and applying software concepts in a professional aerospace environment",
+                "Gained practical knowledge in Python programming",
+                "Studied the working principles of sensors and aircraft structural health monitoring systems"
             ],
             color: "#3b82f6",
         }
@@ -118,7 +119,7 @@ const Experience = () => {
 
                             <div style={{ flex: '1 1 300px', background: 'rgba(255,255,255,0.02)', borderRadius: '2rem', padding: '2rem', border: '1px solid rgba(255,255,255,0.05)' }} className="exp-details">
                                 <h4 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '1.5rem', opacity: 0.8, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                                    Key Responsibilities
+                                    Key Responsibilities & Learnings
                                 </h4>
                                 <ul style={{ listStyle: 'none', display: 'grid', gap: '1.2rem' }}>
                                     {exp.responsibilities.map((item, i) => (
