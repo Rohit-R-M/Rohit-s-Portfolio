@@ -187,7 +187,7 @@ const Hero = () => {
                     >
                         <motion.a
                             href="Rohit Mantur.pdf"
-                            download="Rohit_Mantur_Resume.pdf"
+                            download="Rohit_Mantur.pdf"
                             className="resume-btn"
                             whileHover={{
                                 scale: 1.05,
