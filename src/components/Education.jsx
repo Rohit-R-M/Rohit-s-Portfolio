@@ -5,6 +5,16 @@ import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 const Education = () => {
     const educationData = [
         {
+            degree: "M.Tech in Computer Science and Engineering",
+            specialization: "Internet of Things (IoT)",
+            institution: "University Visvesvaraya College of Engineering (UVCE), Bengaluru",
+            duration: "2026 – Present",
+            grade: "Pursuing",
+            description: "Pursuing advanced studies in Computer Science with a specialization in Internet of Things (IoT), exploring cutting-edge topics in connected systems, embedded computing, and intelligent networks.",
+            location: "Bengaluru, Karnataka",
+            color: "#10b981"
+        },
+        {
             degree: "B.E. in Computer Science & Engineering",
             institution: "Basaveshwar Engineering College, Bagalkot",
             duration: "2022 - 2026",
@@ -116,6 +126,12 @@ const Education = () => {
                                             <h3 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '0.5rem', color: 'var(--text-color)' }}>
                                                 {item.degree}
                                             </h3>
+                                            {item.specialization && (
+                                                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: `${item.color}22`, border: `1px solid ${item.color}55`, color: item.color, fontSize: '0.82rem', fontWeight: '700', padding: '0.25rem 0.75rem', borderRadius: '100px', marginBottom: '0.5rem', letterSpacing: '0.02em' }}>
+                                                    <span>⚡</span>
+                                                    <span>Specialization: {item.specialization}</span>
+                                                </div>
+                                            )}
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: item.color, fontWeight: '600' }} className="institution-info">
                                                 <GraduationCap size={18} />
                                                 <span>{item.institution}</span>
